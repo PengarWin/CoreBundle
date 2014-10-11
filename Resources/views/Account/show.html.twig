@@ -1,0 +1,19 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+    <h1>{{ account.name }}</h1>
+
+    {% if account.parent %}
+        <h4>Parent Account</h4>
+        <p><a href="{{ path('pengarwin_account_show', { 'path': account.parent.path }) }}">{{ account.parent.name }}</a>
+    {% endif %}
+
+    {% if account.children %}
+        <h4>Child Accounts</h4>
+        <ul>
+            {% for child in account.children %}
+                <li><a href="{{ path('pengarwin_account_show', { 'path': child.path }) }}">{{ child.name }}</a>
+            {% endfor %}
+        </p>
+    {% endif %}
+{% endblock %}

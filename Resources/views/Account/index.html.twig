@@ -1,0 +1,12 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+    <h1>Account</h1>
+
+    {% for account in accounts %}
+        <p><a href="{{ path('pengarwin_account_show', { 'path': account.path }) }}">{{ account.name }}</a></p>
+    {% endfor %}
+
+    <h3>Add New Account</h3>
+    {{ form(form) }}
+{% endblock %}
