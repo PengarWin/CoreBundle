@@ -46,4 +46,9 @@ class Account extends BaseAccount implements AccountInterface
      * @ORM\OrderBy({"lft" = "ASC"})
      */
     protected $children;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Posting", mappedBy="account")
+     */
+    protected $postings;
 }

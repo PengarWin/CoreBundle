@@ -3,15 +3,36 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}PengarWin{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            {% stylesheets
+                'bundles/pengarwincore/css/*'
+                'http://fonts.googleapis.com/css?family=Norican'
+                filter='cssrewrite' %}
+                    <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-        <div><a href="{{ path('_homepage') }}">PengarWin</a></div>
-        <hr />
-        {% block body %}{% endblock %}
-        {% block content %}{% endblock %}
+        <div id="dynamicMasthead" class="masthead main section">
+            <div class="inner">
+                <div class="logo"><a href="{{ path('_homepage') }}">PengarWin</a></div>
+            </div><!-- .inner -->
+        </div><!-- #dynamicMasthead.masthead.main.section -->
+        <div id="content" class="main section">
+            <div class="inner">
+                {% block content %}{% endblock %}
+            </div><!-- .inner -->
+        </div><!-- #content.main.section -->
+        <div id="footer" class="main section">
+            <div class="inner">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus risus libero, luctus eu lectus sed, viverra convallis leo.</p>
+                <p>Sed ac convallis erat, nec viverra leo. Suspendisse auctor lobortis ante, euismod rhoncus magna feugiat a.</p>
+                <p>Suspendisse mi mauris, euismod id enim vel, rutrum volutpat nulla.</p>
+                <p>Donec vehicula diam quis facilisis ultricies. In convallis ligula ac scelerisque egestas. Nunc et posuere ante. Pellentesque eleifend sodales lectus eu lobortis.</p>
+            </div><!-- .inner -->
+        </div><!-- #footer.main.section -->
         {% block javascripts %}{% endblock %}
     </body>
 </html>

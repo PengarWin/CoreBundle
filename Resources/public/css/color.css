@@ -1,0 +1,21 @@
+body
+{
+    background-color: #f3eba3;
+    color: #333;
+}
+
+.masthead
+{
+    background-color: #e29063;
+}
+
+#content
+{
+    background-color: #fff;
+}
+
+#footer
+{
+    border-top: 1px solid #ddd;
+    color: #666;
+}
