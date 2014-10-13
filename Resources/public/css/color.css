@@ -1,12 +1,27 @@
+/*
+ * http://www.colorcombos.com/color-scheme-6.html
+ */
+
 body
 {
-    background-color: #f3eba3;
+    background-color: #cccc99;
     color: #333;
+}
+
+h1, h2, h3, h4
+{
+    color: #990033;
 }
 
 .masthead
 {
-    background-color: #e29063;
+    background-color: #666633;
+    color: #cccc99
+}
+
+.masthead a
+{
+    color: inherit;
 }
 
 #content
@@ -16,6 +31,5 @@ body
 
 #footer
 {
-    border-top: 1px solid #ddd;
-    color: #666;
+    color: #666633;
 }

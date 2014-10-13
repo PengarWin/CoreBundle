@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use PengarWin\CoreBundle\Entity\Account;
+use PengarWin\CoreBundle\Entity\Journal;
+use PengarWin\CoreBundle\Entity\Posting;
 
 /**
  * AccountController
@@ -76,8 +78,63 @@ class AccountController extends Controller
      */
     public function showAction(Request $request, Account $account)
     {
+        $form = $this->createFormBuilder(new Journal())
+            ->add('description')
+            ->add('offsetAccount', 'entity', array(
+                'class'    => 'PengarWinCoreBundle:Account',
+                'property' => 'name',
+            ))
+            ->add('creditAmount', 'number', array(
+                'attr' => array(
+                    'size' => 3,
+                )
+            ))
+            ->add('debitAmount', 'number', array(
+                'attr' => array(
+                    'size' => 3,
+                )
+            ))
+            ->add('save', 'submit', array('label' => 'Create'))
+            ->getForm()
+        ;
+
+        $calculatedBalance = 0;
+
+        foreach ($account->getPostings() as $posting) {
+            $calculatedBalance += $posting->getAmount();
+
+            $posting->setCalculatedBalance($calculatedBalance);
+        }
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $amount  = $form->getData()->getCreditAmount();
+            $amount -= $form->getData()->getDebitAmount();
+
+            $posting = new Posting();
+            $posting->setAccount($account);
+            $posting->setAmount($amount);
+
+            $offsetPosting = new Posting();
+            $offsetPosting->setAccount($form->getData()->getOffsetAccount());
+            $offsetPosting->setAmount(-1*$amount);
+
+            $form->getData()->addPosting($posting);
+            $form->getData()->addPosting($offsetPosting);
+
+            $em = $this->get('doctrine')->getManager();
+            $em->persist($form->getData());
+            $em->flush();
+
+            return $this->redirect($this->generateUrl(
+                'pengarwin_account_show', array('path' => $account->getPath())
+            ));
+        }
+
         return array(
             'account' => $account,
+            'form'    => $form->createView(),
         );
     }
 }

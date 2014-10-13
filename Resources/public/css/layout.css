@@ -4,6 +4,12 @@ body
     padding: 0;
 }
 
+.money,
+.money > input
+{
+    text-align: right;
+}
+
 /******************************************************************************
 
 main sections
