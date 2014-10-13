@@ -98,6 +98,31 @@ class AccountController extends Controller
             ->getForm()
         ;
 
+        $segments = array($account->getPath() =>$account->getName());
+
+        $_account = $account;
+
+        while ($_account = $_account->getParent()) {
+            $segments[$_account->getPath()] = $_account->getName();
+        }
+
+        $segments = array_reverse($segments);
+
+        $breadcrumbs = $this->get('white_october_breadcrumbs');
+        $breadcrumbs->addItem(
+            'Home',
+            $this->get('router')->generate('_homepage')
+        );
+
+        foreach ($segments as $path => $label) {
+            $breadcrumbs->addItem(
+                $label,
+                $this->get('router')->generate('pengarwin_account_show', array(
+                    'path' => $path
+                ))
+            );
+        }
+
         $calculatedBalance = 0;
 
         foreach ($account->getPostings() as $posting) {

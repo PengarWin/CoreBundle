@@ -2,7 +2,8 @@
     "name": "pengarwin/core-bundle",
     "require": {
         "php": ">=5.3.0",
-        "pengarwin/double-entry-bundle": "dev-develop"
+        "pengarwin/double-entry-bundle": "dev-develop",
+        "whiteoctober/breadcrumbs-bundle": "dev-master"
     },
     "autoload": {
         "psr-0": { "PengarWin\\CoreBundle": "" }

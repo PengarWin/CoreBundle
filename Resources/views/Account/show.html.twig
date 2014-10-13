@@ -1,14 +1,10 @@
 {% extends '::base.html.twig' %}
 
 {% block content %}
+    {{ wo_render_breadcrumbs() }}
     <h1>{{ account.name }}</h1>
 
-    {% if account.parent %}
-        <h4>Parent Account</h4>
-        <p><a href="{{ path('pengarwin_account_show', { 'path': account.parent.path }) }}">{{ account.parent.name }}</a>
-    {% endif %}
-
-    {% if account.children %}
+    {% if account.children.count %}
         <h4>Child Accounts</h4>
         <ul>
             {% for child in account.children %}
