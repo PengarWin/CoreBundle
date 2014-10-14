@@ -7,6 +7,7 @@
             {% stylesheets
                 'bundles/pengarwincore/css/*'
                 'http://fonts.googleapis.com/css?family=Norican'
+                'http://fonts.googleapis.com/css?family=Oxygen:400,300,700'
                 filter='cssrewrite' %}
                     <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
@@ -20,6 +21,11 @@
                 <div class="logo"><a href="{{ path('_homepage') }}">PengarWin</a></div>
             </div><!-- .inner -->
         </div><!-- #dynamicMasthead.masthead.main.section -->
+        <div class="breadcrumbs main section">
+            <div class="inner">
+                {% block breadcrumbs %}{{ wo_render_breadcrumbs() }}{% endblock %}
+            </div><!-- .inner -->
+        </div><!-- .breadcrumbs.main.section -->
         <div id="content" class="main section">
             <div class="inner">
                 {% block content %}{% endblock %}

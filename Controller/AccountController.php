@@ -37,6 +37,11 @@ class AccountController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $this->get('white_october_breadcrumbs')
+            ->addItem('Home', $this->get('router')->generate('_homepage'))
+            ->addItem('Accounts', $this->get('router')->generate('_homepage'))
+        ;
+
         $em = $this->get('doctrine')->getManager();
 
         $form = $this->createFormBuilder(new Account())

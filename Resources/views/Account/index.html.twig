@@ -1,12 +1,16 @@
 {% extends '::base.html.twig' %}
 
 {% block content %}
-    <h1>Account</h1>
+    <h1>Accounts</h1>
 
-    {% for account in accounts %}
-        <p><a href="{{ path('pengarwin_account_show', { 'path': account.path }) }}">{{ account.name }}</a></p>
-    {% endfor %}
+    <div class="section">
+        {% for account in accounts %}
+            <p><a href="{{ path('pengarwin_account_show', { 'path': account.path }) }}">{{ account.name }}</a></p>
+        {% endfor %}
+    </div><!-- .section -->
 
-    <h3>Add New Account</h3>
-    {{ form(form) }}
+    <div class="section">
+        <h3>Add New Account</h3>
+        {{ form(form) }}
+    </div><!-- .section -->
 {% endblock %}

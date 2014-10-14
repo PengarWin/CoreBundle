@@ -1,7 +1,13 @@
+.breadcrumbs.main.section
+{
+    padding: 0.5em 0;
+}
+
 ul.breadcrumb
 {
     margin-left: 0;
     padding: 0;
+    margin: 0;
 }
 
 ul.breadcrumb li

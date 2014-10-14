@@ -1,48 +1,51 @@
 {% extends '::base.html.twig' %}
 
 {% block content %}
-    {{ wo_render_breadcrumbs() }}
     <h1>{{ account.name }}</h1>
 
     {% if account.children.count %}
-        <h4>Child Accounts</h4>
-        <ul>
-            {% for child in account.children %}
-                <li><a href="{{ path('pengarwin_account_show', { 'path': child.path }) }}">{{ child.name }}</a></li>
-            {% endfor %}
-        </ul>
+        <div class="section">
+            <h3>Child Accounts</h3>
+            <ul>
+                {% for child in account.children %}
+                    <li><a href="{{ path('pengarwin_account_show', { 'path': child.path }) }}">{{ child.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div><!-- .section -->
     {% endif %}
 
-    <h3>Pending Transactions</h3>
-    {{ form_start(form) }}
-        <table cellspacing="0">
-            <thead>
-                <tr>
-                    <th>Description</th>
-                    <th>Offset a/c</th>
-                    <th class="money">Credit</th>
-                    <th class="money">Debit</th>
-                    <th class="money">Balance</th>
-                </tr>
-                <tr>
-                    <td>{{ form_widget(form.description) }}</td>
-                    <td>{{ form_widget(form.offsetAccount) }}</td>
-                    <td class="money">{{ form_widget(form.creditAmount) }}</td>
-                    <td class="money">{{ form_widget(form.debitAmount) }}</td>
-                    <td class="money">{{ form_widget(form.save) }}</td>
-                </tr>
-            </thead>
-            <tbody>
-                {% for posting in account.postings %}
+    <div class="section">
+        <h3>Pending Transactions</h3>
+        {{ form_start(form) }}
+            <table cellspacing="0">
+                <thead>
                     <tr>
-                        <td>{{ posting.journal.description }}</td>
-                        <td><a href="{{ path('pengarwin_account_show', { 'path': posting.offsetPosting.account.path }) }}">{{ posting.offsetPosting.account.name }}</a></td>
-                        <td class="money">{{ posting.creditAmount ? posting.creditAmount|number_format(2) : '' }}</td>
-                        <td class="money">{{ posting.debitAmount ? posting.debitAmount|number_format(2) : '' }}</td>
-                        <td class="money">{{ posting.calculatedBalance|number_format(2) }}</td>
+                        <th>Description</th>
+                        <th>Offset a/c</th>
+                        <th class="money">Credit</th>
+                        <th class="money">Debit</th>
+                        <th class="money">Balance</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {{ form_end(form) }}
+                    <tr>
+                        <td>{{ form_widget(form.description) }}</td>
+                        <td>{{ form_widget(form.offsetAccount) }}</td>
+                        <td class="money">{{ form_widget(form.creditAmount) }}</td>
+                        <td class="money">{{ form_widget(form.debitAmount) }}</td>
+                        <td class="money">{{ form_widget(form.save) }}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for posting in account.postings %}
+                        <tr>
+                            <td>{{ posting.journal.description }}</td>
+                            <td><a href="{{ path('pengarwin_account_show', { 'path': posting.offsetPosting.account.path }) }}">{{ posting.offsetPosting.account.name }}</a></td>
+                            <td class="money">{{ posting.creditAmount ? posting.creditAmount|number_format(2) : '' }}</td>
+                            <td class="money">{{ posting.debitAmount ? posting.debitAmount|number_format(2) : '' }}</td>
+                            <td class="money">{{ posting.calculatedBalance|number_format(2) }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {{ form_end(form) }}
+    </div><!-- .section -->
 {% endblock %}

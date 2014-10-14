@@ -1,9 +1,13 @@
 pengarwin_account:
-    path:      /account
+    path:      /accounts
     defaults:  { _controller: PengarWinCoreBundle:Account:index }
 
 pengarwin_account_show:
-    path:      /account/{path}
+    path:      /{path}
     defaults:  { _controller: PengarWinCoreBundle:Account:show }
     requirements:
-        path: .*
+        path: .+
+
+pengarwin_homepage:
+    path:      /
+    defaults:  { _controller: PengarWinCoreBundle:Default:index }

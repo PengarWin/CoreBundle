@@ -19,7 +19,7 @@ main sections
 .main.section > .inner
 {
     width: 96%;
-    max-width: 50em;
+    max-width: 60em;
     margin-left: auto;
     margin-right: auto;
 }
@@ -44,6 +44,21 @@ content
 #content
 {
     padding: 1em;
+}
+
+#content > .inner
+{
+    min-height: 20em;
+}
+
+#content > .inner > .section
+{
+    margin: 2em 0;
+}
+
+#content > .inner > .section:nth-of-type(first)
+{
+    margin-top: 1em;
 }
 
 /******************************************************************************
