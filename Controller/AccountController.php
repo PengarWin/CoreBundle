@@ -84,6 +84,7 @@ class AccountController extends Controller
     public function showAction(Request $request, Account $account)
     {
         $form = $this->createFormBuilder(new Journal())
+            ->add('vendor')
             ->add('description')
             ->add('offsetAccount', 'entity', array(
                 'class'    => 'PengarWinCoreBundle:Account',

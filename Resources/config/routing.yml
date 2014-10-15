@@ -1,3 +1,12 @@
+pengarwin_vendor:
+    path:      /vendor
+    defaults:  { _controller: PengarWinCoreBundle:Vendor:index }
+
+pengarwin_vendor_show:
+    path:      /vendor/{slug}
+    defaults:  { _controller: PengarWinCoreBundle:Vendor:show }
+
+
 pengarwin_account:
     path:      /accounts
     defaults:  { _controller: PengarWinCoreBundle:Account:index }
@@ -7,6 +16,7 @@ pengarwin_account_show:
     defaults:  { _controller: PengarWinCoreBundle:Account:show }
     requirements:
         path: .+
+
 
 pengarwin_homepage:
     path:      /

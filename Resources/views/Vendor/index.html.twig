@@ -1,0 +1,16 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+    <h1>Vendors</h1>
+
+    <div class="section">
+        {% for vendor in vendors %}
+            <p><a href="{{ path('pengarwin_vendor_show', { 'slug': vendor.slug }) }}">{{ vendor.name }}</a></p>
+        {% endfor %}
+    </div><!-- .section -->
+
+    <div class="section">
+        <h3>Add New Vendor</h3>
+        {{ form(form) }}
+    </div><!-- .section -->
+{% endblock %}

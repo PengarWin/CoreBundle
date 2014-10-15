@@ -20,6 +20,7 @@
             <table cellspacing="0">
                 <thead>
                     <tr>
+                        <th>Vendor</th>
                         <th>Description</th>
                         <th>Offset a/c</th>
                         <th class="money">Credit</th>
@@ -27,6 +28,7 @@
                         <th class="money">Balance</th>
                     </tr>
                     <tr>
+                        <td>{{ form_widget(form.vendor) }}</td>
                         <td>{{ form_widget(form.description) }}</td>
                         <td>{{ form_widget(form.offsetAccount) }}</td>
                         <td class="money">{{ form_widget(form.creditAmount) }}</td>
@@ -37,6 +39,7 @@
                 <tbody>
                     {% for posting in account.postings %}
                         <tr>
+                            <td><a href="{{ path('pengarwin_vendor_show', { 'slug': posting.journal.vendor.slug}) }}">{{ posting.journal.vendor }}</a></td>
                             <td>{{ posting.journal.description }}</td>
                             <td><a href="{{ path('pengarwin_account_show', { 'path': posting.offsetPosting.account.path }) }}">{{ posting.offsetPosting.account.name }}</a></td>
                             <td class="money">{{ posting.creditAmount ? posting.creditAmount|number_format(2) : '' }}</td>

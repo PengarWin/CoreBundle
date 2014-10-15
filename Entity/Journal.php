@@ -32,6 +32,12 @@ class Journal extends BaseJournal implements JournalInterface
     protected $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Vendor", inversedBy="journals")
+     * @ORM\JoinColumn(name="vendor_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $vendor;
+
+    /**
      * @ORM\OneToMany(targetEntity="Posting", mappedBy="journal", cascade={"persist"})
      */
     protected $postings;
