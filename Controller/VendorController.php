@@ -83,6 +83,13 @@ class VendorController extends Controller
     {
         $this->get('white_october_breadcrumbs')
             ->addItem('Home', $this->get('router')->generate('_homepage'))
+            ->addItem('Vendors', $this->get('router')->generate('pengarwin_vendor'))
+            ->addItem(
+                $vendor->getName(),
+                $this->get('router')->generate('pengarwin_vendor_show', array(
+                    'slug' => $vendor->getSlug(),
+                ))
+            )
         ;
 
         return array('vendor' => $vendor);
