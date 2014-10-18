@@ -10,7 +10,7 @@ table td
     padding: 0.5em;
 }
 
-table tr:nth-of-type(even)
+table tbody tr:nth-of-type(odd)
 {
     background-color: #eee;
 }

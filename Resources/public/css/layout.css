@@ -19,7 +19,7 @@ main sections
 .main.section > .inner
 {
     width: 96%;
-    max-width: 60em;
+    max-width: 130em;
     margin-left: auto;
     margin-right: auto;
 }

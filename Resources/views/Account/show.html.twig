@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block content %}
-    <h1>{{ account.name }}</h1>
+    <h1>{{ account.name }} - ${{ account.postedBalance|number_format(2) }}</h1>
 
     {% if account.children.count %}
         <div class="section">
@@ -15,40 +15,61 @@
     {% endif %}
 
     <div class="section">
-        <h3>Pending Transactions</h3>
-        {{ form_start(form) }}
-            <table cellspacing="0">
-                <thead>
+        <table cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Vendor</th>
+                    <th>Description</th>
+                    <th>Offset a/c</th>
+                    <th class="money">Credit</th>
+                    <th class="money">Debit</th>
+                    <th class="money">Balance</th>
+                    <th>Posted?</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for posting in account.postedPostings %}
                     <tr>
-                        <th>Vendor</th>
-                        <th>Description</th>
-                        <th>Offset a/c</th>
-                        <th class="money">Credit</th>
-                        <th class="money">Debit</th>
-                        <th class="money">Balance</th>
+                        <td>{{ posting.journal.date|date('d M Y') }}</td>
+                        <td><a href="{{ path('pengarwin_vendor_show', { 'slug': posting.journal.vendor.slug}) }}">{{ posting.journal.vendor }}</a></td>
+                        <td>{{ posting.journal.description }}</td>
+                        <td><a href="{{ path('pengarwin_account_show', { 'path': posting.offsetPosting.account.path }) }}">{{ posting.offsetPosting.account.segmentation }}</a></td>
+                        <td class="money">{{ posting.creditAmount ? posting.creditAmount|number_format(2) : '' }}</td>
+                        <td class="money">{{ posting.debitAmount ? posting.debitAmount|number_format(2) : '' }}</td>
+                        <td class="money">{{ posting.calculatedBalance|number_format(2) }}</td>
+                        <td>Y</td>
                     </tr>
+                {% endfor %}
+                {% for posting in account.unpostedPostings %}
                     <tr>
-                        <td>{{ form_widget(form.vendor) }}</td>
+                        <td>{{ posting.journal.date|date('d M Y') }}</td>
+                        <td><a href="{{ path('pengarwin_vendor_show', { 'slug': posting.journal.vendor.slug}) }}">{{ posting.journal.vendor }}</a></td>
+                        <td>{{ posting.journal.description }}</td>
+                        <td><a href="{{ path('pengarwin_account_show', { 'path': posting.offsetPosting.account.path }) }}">{{ posting.offsetPosting.account.segmentation }}</a></td>
+                        <td class="money">{{ posting.creditAmount ? posting.creditAmount|number_format(2) : '' }}</td>
+                        <td class="money">{{ posting.debitAmount ? posting.debitAmount|number_format(2) : '' }}</td>
+                        <td class="money">{{ posting.calculatedBalance|number_format(2) }}</td>
+                        <td>
+                            <form action="{{ path('pengarwin_journal_post', { 'path': account.path, 'id': posting.journal.id }) }}" method="post">
+                                <input type="submit" value="P" />
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                {{ form_start(form) }}
+                    <tr>
+                        <td>{{ form_widget(form.date) }}</td>
+                        <td>{{ form_widget(form.proposedVendorName) }}</td>
                         <td>{{ form_widget(form.description) }}</td>
                         <td>{{ form_widget(form.offsetAccount) }}</td>
                         <td class="money">{{ form_widget(form.creditAmount) }}</td>
                         <td class="money">{{ form_widget(form.debitAmount) }}</td>
-                        <td class="money">{{ form_widget(form.save) }}</td>
+                        <td></td>
+                        <td>{{ form_widget(form.save) }}</td>
                     </tr>
-                </thead>
-                <tbody>
-                    {% for posting in account.postings %}
-                        <tr>
-                            <td><a href="{{ path('pengarwin_vendor_show', { 'slug': posting.journal.vendor.slug}) }}">{{ posting.journal.vendor }}</a></td>
-                            <td>{{ posting.journal.description }}</td>
-                            <td><a href="{{ path('pengarwin_account_show', { 'path': posting.offsetPosting.account.path }) }}">{{ posting.offsetPosting.account.name }}</a></td>
-                            <td class="money">{{ posting.creditAmount ? posting.creditAmount|number_format(2) : '' }}</td>
-                            <td class="money">{{ posting.debitAmount ? posting.debitAmount|number_format(2) : '' }}</td>
-                            <td class="money">{{ posting.calculatedBalance|number_format(2) }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {{ form_end(form) }}
+                {{ form_end(form) }}
+            </tbody>
+        </table>
     </div><!-- .section -->
 {% endblock %}

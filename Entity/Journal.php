@@ -32,7 +32,7 @@ class Journal extends BaseJournal implements JournalInterface
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Vendor", inversedBy="journals")
+     * @ORM\ManyToOne(targetEntity="Vendor", inversedBy="journals", cascade={"persist"})
      * @ORM\JoinColumn(name="vendor_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $vendor;

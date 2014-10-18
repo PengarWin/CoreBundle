@@ -16,6 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use PengarWin\CoreBundle\Entity\Account;
 use PengarWin\CoreBundle\Entity\Journal;
 use PengarWin\CoreBundle\Entity\Posting;
+use PengarWin\CoreBundle\Entity\Vendor;
 
 /**
  * AccountController
@@ -83,21 +84,25 @@ class AccountController extends Controller
      */
     public function showAction(Request $request, Account $account)
     {
-        $form = $this->createFormBuilder(new Journal())
-            ->add('vendor')
+        $journal = new Journal();
+        $journal->setDate(new \DateTime());
+
+        $form = $this->createFormBuilder($journal)
+            ->add('date')
+            ->add('proposedVendorName')
             ->add('description')
             ->add('offsetAccount', 'entity', array(
                 'class'    => 'PengarWinCoreBundle:Account',
-                'property' => 'name',
+                'property' => 'segmentation',
             ))
             ->add('creditAmount', 'number', array(
                 'attr' => array(
-                    'size' => 3,
+                    'size' => 2,
                 )
             ))
             ->add('debitAmount', 'number', array(
                 'attr' => array(
-                    'size' => 3,
+                    'size' => 2,
                 )
             ))
             ->add('save', 'submit', array('label' => 'Create'))
@@ -140,8 +145,24 @@ class AccountController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $em = $this->get('doctrine')->getManager();
+
             $amount  = $form->getData()->getCreditAmount();
             $amount -= $form->getData()->getDebitAmount();
+
+            $vendor = $em->getRepository('PengarWinCoreBundle:Vendor')
+                ->findOneBy(array(
+                    'name' => $form->getData()->getProposedVendorName(),
+                ))
+            ;
+
+            if (!$vendor) {
+                $vendor = new Vendor();
+                $vendor->setName($form->getData()->getProposedVendorName());
+                $vendor->setOffsetAccount($form->getData()->getOffsetAccount());
+            }
+
+            $form->getData()->setVendor($vendor);
 
             $posting = new Posting();
             $posting->setAccount($account);
@@ -154,7 +175,6 @@ class AccountController extends Controller
             $form->getData()->addPosting($posting);
             $form->getData()->addPosting($offsetPosting);
 
-            $em = $this->get('doctrine')->getManager();
             $em->persist($form->getData());
             $em->flush();
 

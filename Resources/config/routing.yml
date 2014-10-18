@@ -7,12 +7,21 @@ pengarwin_vendor_show:
     defaults:  { _controller: PengarWinCoreBundle:Vendor:show }
 
 
+pengarwin_journal_post:
+    path:      /accounts/{path}/post-journal/{id}
+    defaults:  { _controller: PengarWinCoreBundle:Journal:post }
+    requirements:
+        _method: post
+        path:       .+
+        journal_id: \d+
+
+
 pengarwin_account:
     path:      /accounts
     defaults:  { _controller: PengarWinCoreBundle:Account:index }
 
 pengarwin_account_show:
-    path:      /{path}
+    path:      /accounts/{path}
     defaults:  { _controller: PengarWinCoreBundle:Account:show }
     requirements:
         path: .+
