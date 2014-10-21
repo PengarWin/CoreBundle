@@ -21,7 +21,7 @@
                     <th>Date</th>
                     <th>Vendor</th>
                     <th>Description</th>
-                    <th>Offset a/c</th>
+                    <th>Offset Account</th>
                     <th class="money">Credit</th>
                     <th class="money">Debit</th>
                     <th class="money">Balance</th>
@@ -62,7 +62,7 @@
                         <td>{{ form_widget(form.date) }}</td>
                         <td>{{ form_widget(form.proposedVendorName) }}</td>
                         <td>{{ form_widget(form.description) }}</td>
-                        <td>{{ form_widget(form.offsetAccount) }}</td>
+                        <td>{{ form_widget(form.proposedOffsetAccountSegmentation) }}</td>
                         <td class="money">{{ form_widget(form.creditAmount) }}</td>
                         <td class="money">{{ form_widget(form.debitAmount) }}</td>
                         <td></td>
@@ -72,4 +72,37 @@
             </tbody>
         </table>
     </div><!-- .section -->
+<script>
+    $(function() {
+        $.ajax({
+            url: "/vendor.json",
+            dataType: "json",
+            success: function(data) {
+                $("#form_proposedVendorName").autocomplete({
+                    delay: 0,
+                    source: data,
+                    minlength: 0,
+                    select: function(event, ui)
+                    {
+                        $("#form_proposedOffsetAccountSegmentation").val(
+                            ui.item.offsetAccount
+                        );
+                    }
+                });
+            }
+        });
+
+        $.ajax({
+            url: "/accounts.json",
+            dataType: "json",
+            success: function(data) {
+                $("#form_proposedOffsetAccountSegmentation").autocomplete({
+                    delay: 0,
+                    source: data,
+                    minlength: 0
+                });
+            }
+        });
+    });
+    </script>
 {% endblock %}

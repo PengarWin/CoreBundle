@@ -8,12 +8,15 @@
                 'bundles/pengarwincore/css/*'
                 'http://fonts.googleapis.com/css?family=Norican'
                 'http://fonts.googleapis.com/css?family=Oxygen:400,300,700'
+                'https://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css'
                 filter='cssrewrite' %}
                     <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     </head>
     <body>
         <div id="dynamicMasthead" class="masthead main section">

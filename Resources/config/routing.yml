@@ -1,6 +1,9 @@
 pengarwin_vendor:
-    path:      /vendor
-    defaults:  { _controller: PengarWinCoreBundle:Vendor:index }
+    path:      /vendor.{_format}
+    defaults:  { _controller: PengarWinCoreBundle:Vendor:index, _format: html}
+    methods:   [GET,POST]
+    requirements:
+         _format: (html|json)
 
 pengarwin_vendor_show:
     path:      /vendor/{slug}
@@ -10,15 +13,19 @@ pengarwin_vendor_show:
 pengarwin_journal_post:
     path:      /accounts/{path}/post-journal/{id}
     defaults:  { _controller: PengarWinCoreBundle:Journal:post }
+    methods:   [POST]
     requirements:
-        _method: post
+        _method: POST
         path:       .+
         journal_id: \d+
 
 
 pengarwin_account:
-    path:      /accounts
-    defaults:  { _controller: PengarWinCoreBundle:Account:index }
+    path:      /accounts.{_format}
+    defaults:  { _controller: PengarWinCoreBundle:Account:index, _format: html }
+    methods:   [GET]
+    requirements:
+         _format: (html|json)
 
 pengarwin_account_show:
     path:      /accounts/{path}

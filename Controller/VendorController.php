@@ -11,6 +11,7 @@ namespace PengarWin\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use PengarWin\CoreBundle\Entity\Vendor;
@@ -61,6 +62,23 @@ class VendorController extends Controller
         $vendors = $em->getRepository('PengarWinCoreBundle:Vendor')
             ->findAll()
         ;
+
+        if ('json' == $request->getRequestFormat()) {
+            $vendorsArray = array();
+
+            foreach ($vendors as $vendor) {
+                $vendorsArray[] = array(
+                  'label'         => $vendor->getName(),
+                  'value'         => $vendor->getName(),
+                  'offsetAccount' => $vendor->getOffsetAccount()->getSegmentation(),
+                );
+            }
+
+            $response = new Response(json_encode($vendorsArray, JSON_PRETTY_PRINT));
+            $response->headers->set('Content-Type', 'application/json');
+
+            return $response;
+        }
 
         return array(
             'vendors' => $vendors,

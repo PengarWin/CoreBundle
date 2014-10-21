@@ -1,0 +1,6 @@
+parameters:
+    pengarwin.account_handler.class: PengarWin\DoubleEntryBundle\Model\AccountHandler
+
+services:
+    pengarwin.account_handler:
+        class:     %pengarwin.account_handler.class%

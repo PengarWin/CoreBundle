@@ -11,6 +11,7 @@ namespace PengarWin\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use PengarWin\CoreBundle\Entity\Account;
@@ -40,7 +41,7 @@ class AccountController extends Controller
     {
         $this->get('white_october_breadcrumbs')
             ->addItem('Home', $this->get('router')->generate('_homepage'))
-            ->addItem('Accounts', $this->get('router')->generate('_homepage'))
+            ->addItem('Accounts', $this->get('router')->generate('pengarwin_account'))
         ;
 
         $em = $this->get('doctrine')->getManager();
@@ -65,6 +66,24 @@ class AccountController extends Controller
             ->findAll()
         ;
 
+        if ('json' == $request->getRequestFormat()) {
+            $accountsArray = array();
+
+            foreach ($accounts as $account) {
+                if (1 < $account->getLvl()) {
+                    $vendorsArray[] = array(
+                      'label'         => $account->getSegmentation(),
+                      'value'         => $account->getSegmentation(),
+                    );
+                }
+            }
+
+            $response = new Response(json_encode($vendorsArray, JSON_PRETTY_PRINT));
+            $response->headers->set('Content-Type', 'application/json');
+
+            return $response;
+        }
+
         return array(
             'accounts' => $accounts,
             'form'     => $form->createView(),
@@ -88,13 +107,16 @@ class AccountController extends Controller
         $journal->setDate(new \DateTime());
 
         $form = $this->createFormBuilder($journal)
-            ->add('date')
+            ->add('date', 'date', array(
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+                'attr' => array(
+                    'size' => 5,
+                )
+            ))
             ->add('proposedVendorName')
             ->add('description')
-            ->add('offsetAccount', 'entity', array(
-                'class'    => 'PengarWinCoreBundle:Account',
-                'property' => 'segmentation',
-            ))
+            ->add('proposedOffsetAccountSegmentation')
             ->add('creditAmount', 'number', array(
                 'attr' => array(
                     'size' => 2,
@@ -114,16 +136,23 @@ class AccountController extends Controller
         $_account = $account;
 
         while ($_account = $_account->getParent()) {
-            $segments[$_account->getPath()] = $_account->getName();
+            if ($_account->getLvl()) {
+                $segments[$_account->getPath()] = $_account->getName();
+            }
         }
 
         $segments = array_reverse($segments);
 
         $breadcrumbs = $this->get('white_october_breadcrumbs');
         $breadcrumbs->addItem(
-            'Home',
-            $this->get('router')->generate('_homepage')
-        );
+                'Home',
+                $this->get('router')->generate('_homepage')
+            )
+            ->addItem(
+                'Accounts',
+                $this->get('router')->generate('pengarwin_account')
+            )
+        ;
 
         foreach ($segments as $path => $label) {
             $breadcrumbs->addItem(
@@ -155,6 +184,24 @@ class AccountController extends Controller
                     'name' => $form->getData()->getProposedVendorName(),
                 ))
             ;
+
+            $chart = $em->getRepository('PengarWinCoreBundle:Account')
+                ->findOneBy(array('lvl' => 0))
+            ;
+
+            $offsetAccount = $this->get('pengarwin.account_handler')
+                ->getAccountFromSegmentation(
+                    $chart,
+                    $form->getData()
+                        ->getProposedOffsetAccountSegmentation()
+                )
+            ;
+
+            if (!$offsetAccount->getId()) {
+                $em->persist($chart);
+            }
+
+            $form->getData()->setOffsetAccount($offsetAccount);
 
             if (!$vendor) {
                 $vendor = new Vendor();
