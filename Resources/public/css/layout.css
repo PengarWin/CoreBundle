@@ -22,6 +22,7 @@ main sections
     max-width: 130em;
     margin-left: auto;
     margin-right: auto;
+    padding: 0 1em;
 }
 
 /******************************************************************************
@@ -43,7 +44,7 @@ content
 
 #content
 {
-    padding: 1em;
+    padding: 1em 0;
 }
 
 #content > .inner
