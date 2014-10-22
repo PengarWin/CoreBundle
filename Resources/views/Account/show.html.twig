@@ -84,11 +84,20 @@
                     minlength: 0,
                     select: function(event, ui)
                     {
+                        $("#form_description").val(
+                            ui.item.defaultJournalDescription
+                        );
                         $("#form_proposedOffsetAccountSegmentation").val(
                             ui.item.defaultOffsetAccount
                         );
                         $("#form_description").val(
                             ui.item.defaultJournalDescription
+                        );
+                        $("#form_creditAmount").val(
+                            ui.item.defaultJournalCreditAmount
+                        );
+                        $("#form_debitAmount").val(
+                            ui.item.defaultJournalDebitAmount
                         );
                     }
                 });

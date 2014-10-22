@@ -47,6 +47,8 @@ class VendorController extends Controller
             ->add('name')
             ->add('defaultOffsetAccount')
             ->add('defaultJournalDescription')
+            ->add('defaultJournalCreditAmount')
+            ->add('defaultJournalDebitAmount')
             ->add('save', 'submit', array('label' => 'Create Vendor'))
             ->getForm()
         ;
@@ -76,6 +78,10 @@ class VendorController extends Controller
                       ->getSegmentation(),
                   'defaultJournalDescription' => $vendor
                       ->getDefaultJournalDescription(),
+                  'defaultJournalCreditAmount' => $vendor
+                      ->getDefaultJournalCreditAmount(),
+                  'defaultJournalDebitAmount' => $vendor
+                      ->getDefaultJournalDebitAmount(),
                 );
             }
 
