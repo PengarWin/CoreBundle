@@ -21,10 +21,10 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Team", inversedBy="users", cascade={"persist"})
-     * @ORM\JoinTable(name="user_team_ref")
+     * @ORM\ManyToMany(targetEntity="Organization", inversedBy="users", cascade={"persist"})
+     * @ORM\JoinTable(name="user_organization_ref")
      */
-    protected $teams;
+    protected $organizations;
 
     /**
      * __construct()
@@ -34,67 +34,67 @@ class User extends BaseUser
      */
     public function __construct()
     {
-        $this->teams = new ArrayCollection();
+        $this->organizations = new ArrayCollection();
 
         parent::__construct();
     }
 
     /**
-     * Add team
+     * Add organization
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2014-10-20
      *
-     * @param  Team $team
+     * @param  Organization $organization
      *
      * @return Account
      */
-    public function addTeam(Team $team)
+    public function addOrganization(Organization $organization)
     {
-        $this->teams->add($team);
+        $this->organizations->add($organization);
 
         return $this;
     }
 
     /**
-     * Remove team
+     * Remove organization
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2014-10-20
      *
-     * @param  Team $team
+     * @param  Organization $organization
      */
-    public function removeTeam(Team $team)
+    public function removeOrganization(Organization $organization)
     {
-        $this->teams->remove($team);
+        $this->organizations->remove($organization);
     }
 
     /**
-     * Get teams
+     * Get organizations
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2014-10-20
      *
-     * @return ArrayCollection|Team
+     * @return ArrayCollection|Organization
      */
-    public function getTeams()
+    public function getOrganizations()
     {
-        return $this->teams;
+        return $this->organizations;
     }
 
     /**
-     * Create default Team
+     * Create default Organization
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2014-10-20
      *
      * @ORM\PrePersist
      */
-    public function createDefaultTeam()
+    public function createDefaultOrganization()
     {
-        $team = new Team();
-        $team->setName($this->getUsername());
+        $organization = new Organization();
+        $organization->setName($this->getUsername());
 
-        $this->teams[] = $team;
+        $this->organizations[] = $organization;
     }
 }

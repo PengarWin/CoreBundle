@@ -42,6 +42,12 @@ class Account extends BaseAccount implements AccountInterface
     protected $parent;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Organization", inversedBy="accounts")
+     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $organization;
+
+    /**
      * @ORM\OneToMany(targetEntity="Account", mappedBy="parent", cascade={"persist"})
      * @ORM\OrderBy({"lft" = "ASC"})
      */
