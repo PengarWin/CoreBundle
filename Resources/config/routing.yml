@@ -23,7 +23,7 @@ pengarwin_journal_post:
 pengarwin_account:
     path:      /accounts.{_format}
     defaults:  { _controller: PengarWinCoreBundle:Account:index, _format: html }
-    methods:   [GET]
+    methods:   [GET,POST]
     requirements:
          _format: (html|json)
 
