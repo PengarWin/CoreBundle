@@ -85,7 +85,10 @@
                     select: function(event, ui)
                     {
                         $("#form_proposedOffsetAccountSegmentation").val(
-                            ui.item.offsetAccount
+                            ui.item.defaultOffsetAccount
+                        );
+                        $("#form_description").val(
+                            ui.item.defaultJournalDescription
                         );
                     }
                 });

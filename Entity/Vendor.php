@@ -20,7 +20,7 @@ use PengarWin\DoubleEntryBundle\Model\VendorInterface;
  * @since  2014-10-13
  *
  * @ORM\Entity
- * @ORM\Table(name="double_entry_vendor")
+ * @ORM\Table(name="pengarwin_vendor")
  */
 class Vendor extends BaseVendor implements VendorInterface
 {
@@ -38,7 +38,7 @@ class Vendor extends BaseVendor implements VendorInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Account", inversedBy="vendors", cascade={"persist"})
-     * @ORM\JoinColumn(name="offset_account_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\JoinColumn(name="default_offset_account_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    protected $offsetAccount;
+    protected $defaultOffsetAccount;
 }

@@ -45,7 +45,8 @@ class VendorController extends Controller
 
         $form = $this->createFormBuilder(new Vendor())
             ->add('name')
-            ->add('offsetAccount')
+            ->add('defaultOffsetAccount')
+            ->add('defaultJournalDescription')
             ->add('save', 'submit', array('label' => 'Create Vendor'))
             ->getForm()
         ;
@@ -68,9 +69,13 @@ class VendorController extends Controller
 
             foreach ($vendors as $vendor) {
                 $vendorsArray[] = array(
-                  'label'         => $vendor->getName(),
-                  'value'         => $vendor->getName(),
-                  'offsetAccount' => $vendor->getOffsetAccount()->getSegmentation(),
+                  'label'                     => $vendor->getName(),
+                  'value'                     => $vendor->getName(),
+                  'defaultOffsetAccount'      => $vendor
+                      ->getDefaultOffsetAccount()
+                      ->getSegmentation(),
+                  'defaultJournalDescription' => $vendor
+                      ->getDefaultJournalDescription(),
                 );
             }
 
