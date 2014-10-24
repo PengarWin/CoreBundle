@@ -97,4 +97,17 @@ class User extends BaseUser
 
         $this->organizations[] = $organization;
     }
+
+    /**
+     * Get default Organization
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2014-10-23
+     *
+     * @return Organization
+     */
+    public function getDefaultOrganization()
+    {
+        return $this->getOrganizations()->first();
+    }
 }
