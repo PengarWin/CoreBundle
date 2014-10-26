@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block content %}
-    <h1>Welcome back, my friend!</h1>
+    <h1>Welcome back, {{ app.user.username }}!</h1>
 
     <p>Current organization: {{ organization_handler.organization.name }}.</p>
 
