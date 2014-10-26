@@ -36,7 +36,7 @@ class Account extends BaseAccount implements AccountInterface
 
     /**
      * @Gedmo\TreeParent
-     * @ORM\ManyToOne(targetEntity="Account", inversedBy="children", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Account", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $parent;
