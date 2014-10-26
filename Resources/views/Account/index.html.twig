@@ -5,7 +5,7 @@
 
     <div class="section">
         {% for account in accounts %}
-            <p><a href="{{ path('pengarwin_account_show', { 'path': account.path }) }}">{{ account.name }}</a></p>
+            <p><a href="{{ path('pengarwin_account_show', { 'path': account.path }) }}">{{ account.segmentation }}</a></p>
         {% endfor %}
     </div><!-- .section -->
 

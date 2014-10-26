@@ -62,8 +62,18 @@ class AccountController extends Controller
             return $this->redirect($this->generateUrl('pengarwin_account'));
         }
 
+
+        $criteria = new \Doctrine\Common\Collections\Criteria();
+        $criteria
+            ->where($criteria->expr()->eq(
+                'organization',
+                $this->get('pengarwin.organization_handler')->getOrganization()
+            ))
+            ->andWhere($criteria->expr()->gt('lvl', 0))
+        ;
+
         $accounts = $em->getRepository('PengarWinCoreBundle:Account')
-            ->findAll()
+            ->matching($criteria)
         ;
 
         if ('json' == $request->getRequestFormat()) {
