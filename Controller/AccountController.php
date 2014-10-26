@@ -124,9 +124,27 @@ class AccountController extends Controller
                     'size' => 5,
                 )
             ))
-            ->add('proposedVendorName')
-            ->add('description')
-            ->add('proposedOffsetAccountSegmentation')
+            ->add('chequeNumber', 'number', array(
+                'required' => false,
+                'attr' => array(
+                    'size' => 1,
+                )
+            ))
+            ->add('proposedVendorName', null, array(
+                'attr' => array(
+                    'size' => 10,
+                )
+            ))
+            ->add('description', null, array(
+                'attr' => array(
+                    'size' => 10,
+                )
+            ))
+            ->add('proposedOffsetAccountSegmentation', null, array(
+                'attr' => array(
+                    'size' => 10,
+                )
+            ))
             ->add('creditAmount', 'number', array(
                 'attr' => array(
                     'size' => 2,
@@ -216,6 +234,9 @@ class AccountController extends Controller
             if (!$vendor) {
                 $vendor = new Vendor();
                 $vendor->setName($form->getData()->getProposedVendorName());
+                $vendor->setDefaultJournalDescription($form->getData()->getDescription());
+                $vendor->setDefaultJournalDebitAmount($form->getData()->getDebitAmount());
+                $vendor->setDefaultJournalCreditAmount($form->getData()->getCreditAmount());
                 $vendor->setDefaultOffsetAccount($form->getData()->getOffsetAccount());
             }
 
