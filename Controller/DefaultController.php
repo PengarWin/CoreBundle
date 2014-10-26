@@ -40,5 +40,10 @@ class DefaultController extends Controller
         $this->get('white_october_breadcrumbs')
             ->addItem('Home', $this->get('router')->generate('_homepage'))
         ;
+
+        $chart = $this->get('pengarwin.account_handler')
+            ->getChartOfAccounts()
+        ;
+
     }
 }

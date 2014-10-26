@@ -3,6 +3,10 @@
 {% block content %}
     <h1>Welcome back, my friend!</h1>
 
-    <p><a href="{{ path('pengarwin_account') }}">Accounts</a></p>
+    <p>Current organization: {{ organization_handler.organization.name }}.</p>
+
+    {% if organization_handler.organization.chartOfAccounts %}
+        <p><a href="{{ path('pengarwin_account') }}">Accounts</a></p>
+    {% endif %}
     <p><a href="{{ path('pengarwin_vendor') }}">Vendors</a></p>
 {% endblock %}
