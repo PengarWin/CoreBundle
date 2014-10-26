@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\Criteria;
+use PengarWin\DoubleEntryBundle\Model\OrganizationInterface;
 use PengarWin\DoubleEntryBundle\Model\Organization as BaseOrganization;
 
 /**
@@ -26,7 +27,7 @@ use PengarWin\DoubleEntryBundle\Model\Organization as BaseOrganization;
  * @ORM\Entity
  * @ORM\Table(name="pengarwin_organization")
  */
-class Organization extends BaseOrganization
+class Organization extends BaseOrganization implements OrganizationInterface
 {
     /**
      * @ORM\Id
@@ -44,4 +45,10 @@ class Organization extends BaseOrganization
      * @ORM\OneToMany(targetEntity="Account", mappedBy="organization", cascade={"persist"})
      */
     protected $accounts;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Account", cascade={"persist"})
+     * @ORM\JoinColumn(name="chart_of_accounts_id", referencedColumnName="id")
+     */
+    protected $chartOfAccounts;
 }
