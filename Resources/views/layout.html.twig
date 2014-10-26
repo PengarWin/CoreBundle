@@ -41,6 +41,7 @@
                         Logged in as <strong>{{ app.user.username }}</strong>.
                         <a href="{{ path('fos_user_security_logout') }}">Log out</a>
                     </p>
+                    <p>Current organization: <strong>{{ organization_handler.organization.name }}</strong>.</p>
                 {% endif %}
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus risus libero, luctus eu lectus sed, viverra convallis leo.</p>
                 <p>Sed ac convallis erat, nec viverra leo. Suspendisse auctor lobortis ante, euismod rhoncus magna feugiat a.</p>
