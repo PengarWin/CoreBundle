@@ -206,7 +206,7 @@ class AccountController extends Controller
             if (!$vendor) {
                 $vendor = new Vendor();
                 $vendor->setName($form->getData()->getProposedVendorName());
-                $vendor->setOffsetAccount($form->getData()->getOffsetAccount());
+                $vendor->setDefaultOffsetAccount($form->getData()->getOffsetAccount());
             }
 
             $form->getData()->setVendor($vendor);
