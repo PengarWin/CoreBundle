@@ -3,7 +3,6 @@
 {% block content %}
     <h1>Welcome back, {{ app.user.username }}!</h1>
 
-    <p>Current organization: {{ organization_handler.organization.name }}.</p>
 
     {% if organization_handler.organization.chartOfAccounts %}
         <p><a href="{{ path('pengarwin_account') }}">Accounts</a></p>
