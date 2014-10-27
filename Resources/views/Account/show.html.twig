@@ -74,25 +74,25 @@
             url: "/vendor.json",
             dataType: "json",
             success: function(data) {
-                $("#form_proposedVendorName").autocomplete({
+                $("#simple_journal_proposedVendorName").autocomplete({
                     delay: 0,
                     source: data,
                     minlength: 0,
                     select: function(event, ui)
                     {
-                        $("#form_description").val(
+                        $("#simple_journal_description").val(
                             ui.item.defaultJournalDescription
                         );
-                        $("#form_proposedOffsetAccountSegmentation").val(
+                        $("#simple_journal_proposedOffsetAccountSegmentation").val(
                             ui.item.defaultOffsetAccount
                         );
-                        $("#form_description").val(
+                        $("#simple_journal_description").val(
                             ui.item.defaultJournalDescription
                         );
-                        $("#form_creditAmount").val(
+                        $("#simple_journal_creditAmount").val(
                             ui.item.defaultJournalCreditAmount
                         );
-                        $("#form_debitAmount").val(
+                        $("#simple_journal_debitAmount").val(
                             ui.item.defaultJournalDebitAmount
                         );
                     }
@@ -104,7 +104,7 @@
             url: "/accounts.json",
             dataType: "json",
             success: function(data) {
-                $("#form_proposedOffsetAccountSegmentation").autocomplete({
+                $("#simple_journal_proposedOffsetAccountSegmentation").autocomplete({
                     delay: 0,
                     source: data,
                     minlength: 0

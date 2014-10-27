@@ -18,6 +18,7 @@ use PengarWin\CoreBundle\Entity\Account;
 use PengarWin\CoreBundle\Entity\Journal;
 use PengarWin\CoreBundle\Entity\Posting;
 use PengarWin\CoreBundle\Entity\Vendor;
+use PengarWin\DoubleEntryBundle\Form\Type\SimpleJournalType;
 
 /**
  * AccountController
@@ -116,48 +117,7 @@ class AccountController extends Controller
         $journal = new Journal();
         $journal->setDate(new \DateTime());
 
-        $form = $this->createFormBuilder($journal)
-            ->add('date', 'date', array(
-                'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd',
-                'attr' => array(
-                    'size' => 5,
-                )
-            ))
-            ->add('chequeNumber', 'number', array(
-                'required' => false,
-                'attr' => array(
-                    'size' => 1,
-                )
-            ))
-            ->add('proposedVendorName', null, array(
-                'attr' => array(
-                    'size' => 10,
-                )
-            ))
-            ->add('description', null, array(
-                'attr' => array(
-                    'size' => 10,
-                )
-            ))
-            ->add('proposedOffsetAccountSegmentation', null, array(
-                'attr' => array(
-                    'size' => 10,
-                )
-            ))
-            ->add('creditAmount', 'number', array(
-                'attr' => array(
-                    'size' => 2,
-                )
-            ))
-            ->add('debitAmount', 'number', array(
-                'attr' => array(
-                    'size' => 2,
-                )
-            ))
-            ->add('save', 'submit', array('label' => 'Create'))
-            ->getForm()
-        ;
+        $form = $this->createForm(new SimpleJournalType(), $journal);
 
         $segments = array($account->getPath() =>$account->getName());
 
