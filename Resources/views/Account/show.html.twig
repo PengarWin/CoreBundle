@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block content %}
-    <h1>{{ account.name }} - ${{ account.postedBalance|number_format(2) }}</h1>
+    <h1>{{ account.name }}</h1>
 
     {% if account.children.count %}
         <div class="section">
