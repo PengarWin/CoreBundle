@@ -56,6 +56,11 @@ class VendorController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $this->get('pengarwin.organization_handler')
+                ->getOrganization()
+                ->addVendor($form->getData())
+            ;
+
             $em->persist($form->getData());
             $em->flush();
 
