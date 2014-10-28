@@ -109,12 +109,22 @@ class VendorController extends Controller
      * @since  2014-10-14
      *
      * @Template
-     * @ParamConverter("vendor", class="PengarWinCoreBundle:Vendor")
      *
      * @param  Request $request
      */
-    public function showAction(Request $request, Vendor $vendor)
+    public function showAction(Request $request, $slug)
     {
+        $vendor = $this->get('pengarwin.organization_handler')
+            ->findVendorForSlug($slug)
+        ;
+
+        if (!$vendor) {
+            throw $this->createNotFoundException(sprintf(
+                'Vendor %s not found',
+                $slug
+            ));
+        }
+
         $this->get('white_october_breadcrumbs')
             ->addItem('Home', $this->get('router')->generate('_homepage'))
             ->addItem('Vendors', $this->get('router')->generate('pengarwin_vendor'))
