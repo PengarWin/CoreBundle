@@ -47,6 +47,11 @@ class Organization extends BaseOrganization implements OrganizationInterface
     protected $accounts;
 
     /**
+     * @ORM\OneToMany(targetEntity="Vendor", mappedBy="organization", cascade={"persist"})
+     */
+    protected $vendors;
+
+    /**
      * @ORM\OneToOne(targetEntity="Account", cascade={"persist"})
      * @ORM\JoinColumn(name="chart_of_accounts_id", referencedColumnName="id")
      */
