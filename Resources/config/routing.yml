@@ -5,9 +5,21 @@ pengarwin_vendor:
     requirements:
          _format: (html|json)
 
+pengarwin_vendor_new:
+    path:      /vendor/new
+    defaults:  { _controller: PengarWinCoreBundle:Vendor:new }
+    methods:   [GET,POST]
+
 pengarwin_vendor_show:
     path:      /vendor/{slug}
     defaults:  { _controller: PengarWinCoreBundle:Vendor:show }
+
+pengarwin_vendor_edit:
+    path:      /vendor/{slug}/edit.{_format}
+    defaults:  { _controller: PengarWinCoreBundle:Vendor:edit, _format: html}
+    methods:   [GET,POST]
+    requirements:
+         _format: (html|json)
 
 
 pengarwin_journal_post:

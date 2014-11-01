@@ -2,4 +2,5 @@
 
 {% block content %}
     <h1>{{ vendor.name }}</h1>
+    <p><a href="{{ path('pengarwin_vendor_edit', { 'slug': vendor.slug }) }}">Edit</a></p>
 {% endblock %}

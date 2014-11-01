@@ -15,20 +15,21 @@ use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use PengarWin\CoreBundle\Entity\Vendor;
+use PengarWin\DoubleEntryBundle\Form\Type\VendorType;
 
 /**
  * VendorController
  *
- * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
- * @since  2014-10-14
+ * @author Tom Haskins-Vaughan <tom@tomhv.uk>
+ * @since  1.0.0
  */
 class VendorController extends Controller
 {
     /**
      * index
      *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2014-10-14
+     * @author Tom Haskins-Vaughan <tom@tomhv.uk>
+     * @since  1.0.0
      *
      * @Template
      *
@@ -41,35 +42,19 @@ class VendorController extends Controller
             ->addItem('Vendors', $this->get('router')->generate('pengarwin_vendor'))
         ;
 
-        $em = $this->get('doctrine')->getManager();
-
-        $form = $this->createFormBuilder(new Vendor())
-            ->add('name')
-            ->add('defaultOffsetAccount')
-            ->add('defaultJournalDescription')
-            ->add('defaultJournalCreditAmount')
-            ->add('defaultJournalDebitAmount')
-            ->add('save', 'submit', array('label' => 'Create Vendor'))
-            ->getForm()
+        $organization = $this->get('pengarwin.organization_handler')
+            ->getOrganization()
         ;
 
-        $form->handleRequest($request);
+        $vendor = new Vendor();
+        $vendor->setOrganization($organization);
 
-        if ($form->isValid()) {
-            $this->get('pengarwin.organization_handler')
-                ->getOrganization()
-                ->addVendor($form->getData())
-            ;
+        $form = $this->createForm(new VendorType(), $vendor, array(
+            'label' => 'Create',
+            'action' => $this->generateUrl('pengarwin_vendor_new'),
+        ));
 
-            $em->persist($form->getData());
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('pengarwin_vendor'));
-        }
-
-        $vendors = $em->getRepository('PengarWinCoreBundle:Vendor')
-            ->findAll()
-        ;
+        $vendors = $organization->getVendors();
 
         if ('json' == $request->getRequestFormat()) {
             $vendorsArray = array();
@@ -103,28 +88,64 @@ class VendorController extends Controller
     }
 
     /**
-     * show
+     * new
      *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2014-10-14
+     * @author Tom Haskins-Vaughan <tom@tomhv.uk>
+     * @since  1.0.0
      *
      * @Template
      *
      * @param  Request $request
      */
-    public function showAction(Request $request, $slug)
+    public function newAction(Request $request)
     {
-        $vendor = $this->get('pengarwin.organization_handler')
-            ->findVendorForSlug($slug)
+        $this->get('white_october_breadcrumbs')
+            ->addItem('Home', $this->get('router')->generate('_homepage'))
+            ->addItem('Vendors', $this->get('router')->generate('pengarwin_vendor'))
+            ->addItem('New', $this->get('router')->generate('pengarwin_vendor_new'))
         ;
 
-        if (!$vendor) {
-            throw $this->createNotFoundException(sprintf(
-                'Vendor %s not found',
-                $slug
+        $vendor = new Vendor();
+        $vendor->setOrganization(
+            $this->get('pengarwin.organization_handler')->getOrganization()
+        );
+
+        $form = $this->createForm(new VendorType(), $vendor, array(
+            'label' => 'Create',
+        ));
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->get('doctrine')->getManager();
+            $em->persist($form->getData());
+            $em->flush();
+
+            return $this->redirect($this->generateUrl(
+                'pengarwin_vendor_show', array(
+                    'slug' => $vendor->getSlug(),
+                )
             ));
         }
 
+        return array('form'  => $form->createView());
+    }
+
+    /**
+     * show
+     *
+     * @author Tom Haskins-Vaughan <tom@tomhv.uk>
+     * @since  1.0.0
+     *
+     * @Template
+     *
+     * @ParamConverter("vendor", class="PengarWinCoreBundle:Vendor")
+     *
+     * @param  Request $request
+     * @param  Vendor  $vendor
+     */
+    public function showAction(Request $request, Vendor $vendor)
+    {
         $this->get('white_october_breadcrumbs')
             ->addItem('Home', $this->get('router')->generate('_homepage'))
             ->addItem('Vendors', $this->get('router')->generate('pengarwin_vendor'))
@@ -137,5 +158,58 @@ class VendorController extends Controller
         ;
 
         return array('vendor' => $vendor);
+    }
+
+    /**
+     * edit
+     *
+     * @author Tom Haskins-Vaughan <tom@tomhv.uk>
+     * @since  1.0.0
+     *
+     * @Template
+     *
+     * @ParamConverter("vendor", class="PengarWinCoreBundle:Vendor")
+     *
+     * @param  Request $request
+     * @param  Vendor  $vendor
+     */
+    public function editAction(Request $request, Vendor $vendor)
+    {
+        $this->get('white_october_breadcrumbs')
+            ->addItem('Home', $this->get('router')->generate('_homepage'))
+            ->addItem('Vendors', $this->get('router')->generate('pengarwin_vendor'))
+            ->addItem(
+                $vendor->getName(),
+                $this->get('router')->generate('pengarwin_vendor_show', array(
+                    'slug' => $vendor->getSlug(),
+                ))
+            )
+            ->addItem(
+                'Edit',
+                $this->get('router')->generate('pengarwin_vendor_edit', array(
+                    'slug' => $vendor->getSlug(),
+                ))
+            )
+        ;
+
+        $form = $this->createForm(new VendorType(), $vendor);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->get('doctrine')->getManager();
+            $em->persist($form->getData());
+            $em->flush();
+
+            return $this->redirect($this->generateUrl(
+                'pengarwin_vendor_show', array(
+                    'slug' => $vendor->getSlug(),
+                )
+            ));
+        }
+
+        return array(
+            'vendor' => $vendor,
+            'form' => $form->createView(),
+        );
     }
 }

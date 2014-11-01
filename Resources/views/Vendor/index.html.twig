@@ -4,9 +4,30 @@
     <h1>Vendors</h1>
 
     <div class="section">
-        {% for vendor in vendors %}
-            <p><a href="{{ path('pengarwin_vendor_show', { 'slug': vendor.slug }) }}">{{ vendor.name }}</a></p>
-        {% endfor %}
+        <table cellspacing="0">
+            <thead>
+                <th>Name</th>
+                <th>Offset A/C</th>
+                <th>Default Description</th>
+                <th class="money">Default Credit</th>
+                <th class="money">Default Debit</th>
+                <th</th>
+            </thead>
+            <tbody>
+                {% for vendor in vendors %}
+                    <tr>
+                        <td><a href="{{ path('pengarwin_vendor_show', { 'slug': vendor.slug }) }}">{{ vendor.name }}</a></td>
+                        <td><a href="{{ path('pengarwin_account_show', {
+                            'path': vendor.defaultOffsetAccount.path
+                        }) }}">{{ vendor.defaultOffsetAccount.segmentation }}</a></td>
+                        <td>{{ vendor.defaultJournalDescription }}</td>
+                        <td class="money">{{ vendor.defaultJournalCreditAmount }}</td>
+                        <td class="money">{{ vendor.defaultJournalDebitAmount }}</td>
+                        <td><a href="{{ path('pengarwin_vendor_edit', { 'slug': vendor.slug }) }}">Edit</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div><!-- .section -->
 
     <div class="section">
