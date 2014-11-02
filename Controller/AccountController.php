@@ -114,42 +114,33 @@ class AccountController extends Controller
      */
     public function showAction(Request $request, Account $account)
     {
-        $journal = new Journal();
-        $journal->setDate(new \DateTime());
-
-        $form = $this->createForm(new SimpleJournalType(), $journal);
-
-        $segments = array($account->getPath() =>$account->getName());
+        $form = $this->createForm(new SimpleJournalType(), new Journal());
 
         $_account = $account;
 
-        while ($_account = $_account->getParent()) {
+        while ($_account) {
             if ($_account->getLvl()) {
-                $segments[$_account->getPath()] = $_account->getName();
+                $this->get('white_october_breadcrumbs')->prependItem(
+                    $_account->getName(),
+                    $this->get('router')->generate('pengarwin_account_show', array(
+                        'path' => $_account->getPath()
+                    ))
+                );
             }
+
+            $_account = $_account->getParent();
         }
 
-        $segments = array_reverse($segments);
-
-        $breadcrumbs = $this->get('white_october_breadcrumbs');
-        $breadcrumbs->addItem(
-                'Home',
-                $this->get('router')->generate('_homepage')
-            )
-            ->addItem(
+        $this->get('white_october_breadcrumbs')
+            ->prependItem(
                 'Accounts',
                 $this->get('router')->generate('pengarwin_account')
             )
+            ->prependItem(
+                'Home',
+                $this->get('router')->generate('_homepage')
+            )
         ;
-
-        foreach ($segments as $path => $label) {
-            $breadcrumbs->addItem(
-                $label,
-                $this->get('router')->generate('pengarwin_account_show', array(
-                    'path' => $path
-                ))
-            );
-        }
 
         $calculatedBalance = 0;
 
@@ -166,12 +157,6 @@ class AccountController extends Controller
 
             $amount  = $form->getData()->getCreditAmount();
             $amount -= $form->getData()->getDebitAmount();
-
-            $vendor = $em->getRepository('PengarWinCoreBundle:Vendor')
-                ->findOneBy(array(
-                    'name' => $form->getData()->getProposedVendorName(),
-                ))
-            ;
 
             $chart = $em->getRepository('PengarWinCoreBundle:Account')
                 ->findOneBy(array('lvl' => 0))
@@ -191,6 +176,7 @@ class AccountController extends Controller
 
             $form->getData()->setOffsetAccount($offsetAccount);
 
+            /*
             if (!$vendor) {
                 $vendor = new Vendor();
                 $vendor->setName($form->getData()->getProposedVendorName());
@@ -201,6 +187,7 @@ class AccountController extends Controller
             }
 
             $form->getData()->setVendor($vendor);
+            */
 
             $posting = new Posting();
             $posting->setAccount($account);

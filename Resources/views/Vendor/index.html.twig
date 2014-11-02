@@ -17,9 +17,13 @@
                 {% for vendor in vendors %}
                     <tr>
                         <td><a href="{{ path('pengarwin_vendor_show', { 'slug': vendor.slug }) }}">{{ vendor.name }}</a></td>
-                        <td><a href="{{ path('pengarwin_account_show', {
-                            'path': vendor.defaultOffsetAccount.path
-                        }) }}">{{ vendor.defaultOffsetAccount.segmentation }}</a></td>
+                        {% if vendor.defaultOffsetAccount %}
+                            <td><a href="{{ path('pengarwin_account_show', {
+                                'path': vendor.defaultOffsetAccount.path
+                            }) }}">{{ vendor.defaultOffsetAccount.segmentation }}</a></td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
                         <td>{{ vendor.defaultJournalDescription }}</td>
                         <td class="money">{{ vendor.defaultJournalCreditAmount }}</td>
                         <td class="money">{{ vendor.defaultJournalDebitAmount }}</td>

@@ -57,7 +57,7 @@
                     <tr>
                         <td>{{ form_widget(form.date) }}</td>
                         <td>{{ form_widget(form.chequeNumber) }}</td>
-                        <td>{{ form_widget(form.proposedVendorName) }}</td>
+                        <td>{{ form_widget(form.vendor) }}</td>
                         <td>{{ form_widget(form.proposedOffsetAccountSegmentation) }}</td>
                         <td>{{ form_widget(form.description) }}</td>
                         <td class="money">{{ form_widget(form.creditAmount) }}</td>
@@ -74,7 +74,7 @@
             url: "/vendor.json",
             dataType: "json",
             success: function(data) {
-                $("#simple_journal_proposedVendorName").autocomplete({
+                $("#simple_journal_vendor").autocomplete({
                     delay: 0,
                     source: data,
                     minlength: 0,
