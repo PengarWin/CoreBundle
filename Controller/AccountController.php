@@ -114,8 +114,6 @@ class AccountController extends Controller
      */
     public function showAction(Request $request, Account $account)
     {
-        $form = $this->createForm(new SimpleJournalType(), new Journal());
-
         $_account = $account;
 
         while ($_account) {
@@ -150,6 +148,7 @@ class AccountController extends Controller
             $posting->setCalculatedBalance($calculatedBalance);
         }
 
+        $form = $this->createForm(new SimpleJournalType(), new Journal());
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -158,16 +157,11 @@ class AccountController extends Controller
             $amount  = $form->getData()->getCreditAmount();
             $amount -= $form->getData()->getDebitAmount();
 
-            $posting = new Posting();
-            $posting->setAccount($account);
-            $posting->setAmount($amount);
-
-            $offsetPosting = new Posting();
-            $offsetPosting->setAccount($form->getData()->getOffsetAccount());
-            $offsetPosting->setAmount(-1*$amount);
-
-            $form->getData()->addPosting($posting);
-            $form->getData()->addPosting($offsetPosting);
+            $form->getData()->addPosting(new Posting($account, $amount));
+            $form->getData()->addPosting(new Posting(
+                $form->getData()->getOffsetAccount(),
+                -1*$amount
+            ));
 
             $em->persist($form->getData());
             $em->flush();
