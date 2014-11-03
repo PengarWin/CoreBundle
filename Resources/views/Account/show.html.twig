@@ -58,7 +58,7 @@
                         <td>{{ form_widget(form.date) }}</td>
                         <td>{{ form_widget(form.chequeNumber) }}</td>
                         <td>{{ form_widget(form.vendor) }}</td>
-                        <td>{{ form_widget(form.proposedOffsetAccountSegmentation) }}</td>
+                        <td>{{ form_widget(form.offsetAccount) }}</td>
                         <td>{{ form_widget(form.description) }}</td>
                         <td class="money">{{ form_widget(form.creditAmount) }}</td>
                         <td class="money">{{ form_widget(form.debitAmount) }}</td>
@@ -83,7 +83,7 @@
                         $("#simple_journal_description").val(
                             ui.item.defaultJournalDescription
                         );
-                        $("#simple_journal_proposedOffsetAccountSegmentation").val(
+                        $("#simple_journal_offsetAccount").val(
                             ui.item.defaultOffsetAccount
                         );
                         $("#simple_journal_description").val(

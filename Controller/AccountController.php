@@ -158,37 +158,6 @@ class AccountController extends Controller
             $amount  = $form->getData()->getCreditAmount();
             $amount -= $form->getData()->getDebitAmount();
 
-            $chart = $em->getRepository('PengarWinCoreBundle:Account')
-                ->findOneBy(array('lvl' => 0))
-            ;
-
-            $offsetAccount = $this->get('pengarwin.account_handler')
-                ->getAccountFromSegmentation(
-                    $chart,
-                    $form->getData()
-                        ->getProposedOffsetAccountSegmentation()
-                )
-            ;
-
-            if (!$offsetAccount->getId()) {
-                $em->persist($chart);
-            }
-
-            $form->getData()->setOffsetAccount($offsetAccount);
-
-            /*
-            if (!$vendor) {
-                $vendor = new Vendor();
-                $vendor->setName($form->getData()->getProposedVendorName());
-                $vendor->setDefaultJournalDescription($form->getData()->getDescription());
-                $vendor->setDefaultJournalDebitAmount($form->getData()->getDebitAmount());
-                $vendor->setDefaultJournalCreditAmount($form->getData()->getCreditAmount());
-                $vendor->setDefaultOffsetAccount($form->getData()->getOffsetAccount());
-            }
-
-            $form->getData()->setVendor($vendor);
-            */
-
             $posting = new Posting();
             $posting->setAccount($account);
             $posting->setAmount($amount);
