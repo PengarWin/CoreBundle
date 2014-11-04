@@ -74,7 +74,7 @@ class VendorParamConverter implements ParamConverterInterface
             ));
         }
 
-        $request->attributes($configuration->getName(), $vendor);
+        $request->attributes->set($configuration->getName(), $vendor);
 
         return true;
     }

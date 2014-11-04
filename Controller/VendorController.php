@@ -139,7 +139,7 @@ class VendorController extends Controller
      *
      * @Template
      *
-     * @ParamConverter("vendor", class="PengarWinCoreBundle:Vendor")
+     * @ParamConverter("vendor", class="PengarWin\CoreBundle\Entity\Vendor")
      *
      * @param  Request $request
      * @param  Vendor  $vendor
@@ -168,7 +168,7 @@ class VendorController extends Controller
      *
      * @Template
      *
-     * @ParamConverter("vendor", class="PengarWinCoreBundle:Vendor")
+     * @ParamConverter("vendor", class="PengarWin\CoreBundle\Entity\Vendor")
      *
      * @param  Request $request
      * @param  Vendor  $vendor
