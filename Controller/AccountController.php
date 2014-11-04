@@ -114,31 +114,27 @@ class AccountController extends Controller
      */
     public function showAction(Request $request, Account $account)
     {
-        $_account = $account;
-
-        while ($_account) {
-            if ($_account->getLvl()) {
-                $this->get('white_october_breadcrumbs')->prependItem(
-                    $_account->getName(),
-                    $this->get('router')->generate('pengarwin_account_show', array(
-                        'path' => $_account->getPath()
-                    ))
-                );
-            }
-
-            $_account = $_account->getParent();
-        }
-
         $this->get('white_october_breadcrumbs')
-            ->prependItem(
-                'Accounts',
-                $this->get('router')->generate('pengarwin_account')
-            )
-            ->prependItem(
-                'Home',
+            ->addItem('Home',
                 $this->get('router')->generate('_homepage')
             )
+            ->addItem('Accounts',
+                $this->get('router')->generate('pengarwin_account')
+            )
         ;
+
+        $treePath = $this->get('pengarwin.account_handler')
+            ->getTreePath($account)
+        ;
+
+        foreach ($treePath as $node) {
+            $this->get('white_october_breadcrumbs')
+                ->addItem($node->getName(),
+                    $this->get('router')->generate('pengarwin_account_show', array(
+                        'path' => $node->getPath()
+                )))
+            ;
+        }
 
         $calculatedBalance = 0;
 

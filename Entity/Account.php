@@ -24,6 +24,7 @@ use PengarWin\DoubleEntryBundle\Model\AccountInterface;
  * @ORM\Table(name="pengarwin_account")
  * @ORM\HasLifecycleCallbacks()
  * @Gedmo\Tree(type="nested")
+ * @ORM\Entity(repositoryClass="Gedmo\Tree\Entity\Repository\NestedTreeRepository")
  */
 class Account extends BaseAccount implements AccountInterface
 {
