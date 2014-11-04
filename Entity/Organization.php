@@ -37,7 +37,7 @@ class Organization extends BaseOrganization implements OrganizationInterface
     protected $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="organizations")
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="organizations")
      */
     protected $users;
 
