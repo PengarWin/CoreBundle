@@ -43,7 +43,7 @@ class Vendor extends BaseVendor implements VendorInterface
     protected $organization;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Account", inversedBy="vendors", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Account", cascade={"persist"})
      * @ORM\JoinColumn(name="default_offset_account_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $defaultOffsetAccount;
