@@ -20,7 +20,7 @@ use PengarWin\DoubleEntryBundle\Model\PostingInterface;
  * @since  2014-10-11
  *
  * @ORM\Entity
- * @ORM\Table(name="double_entry_posting")
+ * @ORM\Table(name="pengarwin_posting")
  */
 class Posting extends BasePosting implements PostingInterface
 {

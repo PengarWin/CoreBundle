@@ -21,7 +21,7 @@ use PengarWin\DoubleEntryBundle\Model\AccountInterface;
  * @since  2014-10-08
  *
  * @ORM\Entity
- * @ORM\Table(name="double_entry_account")
+ * @ORM\Table(name="pengarwin_account")
  * @ORM\HasLifecycleCallbacks()
  * @Gedmo\Tree(type="nested")
  */

@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks()
- * @ORM\Table(name="fos_user")
+ * @ORM\Table(name="pengarwin_user")
  */
 class User extends BaseUser
 {
@@ -22,7 +22,7 @@ class User extends BaseUser
 
     /**
      * @ORM\ManyToMany(targetEntity="Organization", inversedBy="users", cascade={"persist"})
-     * @ORM\JoinTable(name="user_organization_ref")
+     * @ORM\JoinTable(name="pengarwin_user_organization_ref")
      */
     protected $organizations;
 

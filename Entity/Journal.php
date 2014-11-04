@@ -20,7 +20,7 @@ use PengarWin\DoubleEntryBundle\Model\JournalInterface;
  * @since  2014-10-11
  *
  * @ORM\Entity
- * @ORM\Table(name="double_entry_journal")
+ * @ORM\Table(name="pengarwin_journal")
  */
 class Journal extends BaseJournal implements JournalInterface
 {
