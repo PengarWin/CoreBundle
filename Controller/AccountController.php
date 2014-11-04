@@ -108,7 +108,7 @@ class AccountController extends Controller
      * @since  2014-10-11
      *
      * @Template
-     * @ParamConverter("account", class="PengarWinCoreBundle:Account")
+     * @ParamConverter("account", class="PengarWin\CoreBundle\Entity\Account")
      *
      * @param  Request $request
      */
