@@ -1,6 +1,7 @@
 body
 {
     font-family: arial, sans-serif;
+    font-size: 0.875em;
 }
 
 h1, h2, h3
@@ -34,7 +35,7 @@ h3
 
 .breadcrumbs.main.section > .inner > *
 {
-    font-size: 0.8em;
+    font-size: 0.9em;
     text-transform: uppercase;
 }
 
