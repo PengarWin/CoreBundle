@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use PengarWin\CoreBundle\Entity\Journal;
+use PengarWin\DoubleEntryBundle\Form\Type\JournalType;
+use PengarWin\DoubleEntryBundle\Exception\JournalImbalanceException;
 
 /**
  * JournalController
@@ -52,5 +54,48 @@ class JournalController extends Controller
         return $this->redirect($this->generateUrl(
             'pengarwin_account_show', array('path' => $account->getPath())
         ));
+    }
+
+    /**
+     * edit
+     *
+     * @author Tom Haskins-Vaughan <tom@tomhv.uk>
+     * @since  1.0.0
+     *
+     * @Template
+     * @ParamConverter("journal", class="PengarWinCoreBundle:Journal")
+     *
+     * @param  Request $request
+     * @param  Journal $journal
+     */
+    public function editAction(Request $request, Journal $journal)
+    {
+        $form = $this->createForm('journal', $journal);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            try {
+                $em = $this->get('doctrine')->getManager();
+                $em->persist($form->getData());
+                $em->flush();
+
+                return $this->redirect($this->generateUrl(
+                    'pengarwin_account_show', array(
+                        'path' => $journal
+                            ->getPostings()
+                            ->first()
+                            ->getAccount()
+                            ->getPath(),
+                    )
+                ));
+            } catch (JournalImbalanceException $e) {
+                exit($e->getMessage());
+            }
+        }
+
+        return array(
+            'journal' => $journal,
+            'form' => $form->createView(),
+        );
     }
 }

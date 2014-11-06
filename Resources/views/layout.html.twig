@@ -50,5 +50,50 @@
             </div><!-- .inner -->
         </div><!-- #footer.main.section -->
         {% block javascripts %}{% endblock %}
+<script>
+    $(function() {
+        $.ajax({
+            url: "/vendor.json",
+            dataType: "json",
+            success: function(data) {
+                $(".vendor_selector").autocomplete({
+                    delay: 0,
+                    source: data,
+                    minlength: 0,
+                    select: function(event, ui)
+                    {
+                        $("#simple_journal_description").val(
+                            ui.item.defaultJournalDescription
+                        );
+                        $("#simple_journal_offsetAccount").val(
+                            ui.item.defaultOffsetAccount
+                        );
+                        $("#simple_journal_description").val(
+                            ui.item.defaultJournalDescription
+                        );
+                        $("#simple_journal_creditAmount").val(
+                            ui.item.defaultJournalCreditAmount
+                        );
+                        $("#simple_journal_debitAmount").val(
+                            ui.item.defaultJournalDebitAmount
+                        );
+                    }
+                });
+            }
+        });
+
+        $.ajax({
+            url: "/accounts.json",
+            dataType: "json",
+            success: function(data) {
+                $(".account_selector").autocomplete({
+                    delay: 0,
+                    source: data,
+                    minlength: 0
+                });
+            }
+        });
+    });
+    </script>
     </body>
 </html>
