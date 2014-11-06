@@ -21,6 +21,7 @@ use PengarWin\DoubleEntryBundle\Model\PostingInterface;
  *
  * @ORM\Entity
  * @ORM\Table(name="pengarwin_posting")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Posting extends BasePosting implements PostingInterface
 {
@@ -30,6 +31,12 @@ class Posting extends BasePosting implements PostingInterface
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Organization")
+     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $organization;
 
     /**
      * @ORM\ManyToOne(targetEntity="Account", inversedBy="postings")
