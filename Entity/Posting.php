@@ -39,7 +39,7 @@ class Posting extends BasePosting implements PostingInterface
     protected $organization;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Account", inversedBy="postings")
+     * @ORM\ManyToOne(targetEntity="Account", inversedBy="postings", cascade={"persist"})
      * @ORM\JoinColumn(name="account_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $account;
