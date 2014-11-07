@@ -128,12 +128,14 @@ class AccountController extends Controller
         ;
 
         foreach ($treePath as $node) {
-            $this->get('white_october_breadcrumbs')
-                ->addItem($node->getName(),
-                    $this->get('router')->generate('pengarwin_account_show', array(
-                        'path' => $node->getPath()
-                )))
-            ;
+            if ($node->getLvl()) {
+                $this->get('white_october_breadcrumbs')
+                    ->addItem($node->getName(),
+                        $this->get('router')->generate('pengarwin_account_show', array(
+                            'path' => $node->getPath()
+                    )))
+                ;
+            }
         }
 
         $calculatedBalance = 0;
