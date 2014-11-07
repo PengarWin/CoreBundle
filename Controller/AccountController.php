@@ -146,7 +146,9 @@ class AccountController extends Controller
             $posting->setCalculatedBalance($calculatedBalance);
         }
 
-        $form = $this->createForm(new SimpleJournalType(), new Journal());
+        $journal = $this->get('pengarwin.journal_handler')->createJournal();
+
+        $form = $this->createForm(new SimpleJournalType(), $journal);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

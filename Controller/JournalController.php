@@ -32,7 +32,7 @@ class JournalController extends Controller
      * @since  2014-10-15
      *
      * @Template
-     * @ParamConverter("journal", class="PengarWinCoreBundle:Journal")
+     * @ParamConverter("journal", class="\PengarWin\CoreBundle\Entity\Journal")
      *
      * @param  Request $request
      * @param  Journal $journal
@@ -63,7 +63,7 @@ class JournalController extends Controller
      * @since  1.0.0
      *
      * @Template
-     * @ParamConverter("journal", class="PengarWinCoreBundle:Journal")
+     * @ParamConverter("journal", class="\PengarWin\CoreBundle\Entity\Journal")
      *
      * @param  Request $request
      * @param  Journal $journal
