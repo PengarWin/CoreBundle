@@ -23,7 +23,7 @@ use PengarWin\DoubleEntryBundle\Form\Type\SimpleJournalType;
 /**
  * AccountController
  *
- * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+ * @author Tom Haskins-Vaughan <tom@tomhv.uk>
  * @since  2014-10-09
  */
 class AccountController extends Controller
@@ -31,7 +31,7 @@ class AccountController extends Controller
     /**
      * index
      *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @author Tom Haskins-Vaughan <tom@tomhv.uk>
      * @since  2014-10-09
      *
      * @Template
@@ -104,7 +104,7 @@ class AccountController extends Controller
     /**
      * show
      *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @author Tom Haskins-Vaughan <tom@tomhv.uk>
      * @since  2014-10-11
      *
      * @Template

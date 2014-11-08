@@ -17,7 +17,7 @@ use PengarWin\DoubleEntryBundle\Model\AccountInterface;
 /**
  * Account
  *
- * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+ * @author Tom Haskins-Vaughan <tom@tomhv.uk>
  * @since  2014-10-08
  *
  * @ORM\Entity

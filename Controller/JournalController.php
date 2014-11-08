@@ -20,7 +20,7 @@ use PengarWin\DoubleEntryBundle\Exception\JournalImbalanceException;
 /**
  * JournalController
  *
- * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+ * @author Tom Haskins-Vaughan <tom@tomhv.uk>
  * @since  2014-10-09
  */
 class JournalController extends Controller
@@ -28,7 +28,7 @@ class JournalController extends Controller
     /**
      * post
      *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @author Tom Haskins-Vaughan <tom@tomhv.uk>
      * @since  2014-10-15
      *
      * @Template

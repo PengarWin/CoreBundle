@@ -20,7 +20,7 @@ use PengarWin\CoreBundle\Entity\Posting;
 /**
  * DefaultController
  *
- * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+ * @author Tom Haskins-Vaughan <tom@tomhv.uk>
  * @since  2014-10-13
  */
 class DefaultController extends Controller
@@ -28,7 +28,7 @@ class DefaultController extends Controller
     /**
      * index
      *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @author Tom Haskins-Vaughan <tom@tomhv.uk>
      * @since  2014-10-09
      *
      * @Template

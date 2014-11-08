@@ -16,7 +16,7 @@ use PengarWin\DoubleEntryBundle\Model\PostingInterface;
 /**
  * Posting
  *
- * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+ * @author Tom Haskins-Vaughan <tom@tomhv.uk>
  * @since  2014-10-11
  *
  * @ORM\Entity
