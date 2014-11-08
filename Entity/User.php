@@ -30,7 +30,7 @@ class User extends BaseUser
      * __construct()
      *
      * @author Tom Haskins-Vaughan <tom@tomhv.uk>
-     * @since  2014-10-20
+     * @since  0.8.0
      */
     public function __construct()
     {
@@ -43,7 +43,7 @@ class User extends BaseUser
      * Add organization
      *
      * @author Tom Haskins-Vaughan <tom@tomhv.uk>
-     * @since  2014-10-20
+     * @since  0.8.0
      *
      * @param  Organization $organization
      *
@@ -60,7 +60,7 @@ class User extends BaseUser
      * Remove organization
      *
      * @author Tom Haskins-Vaughan <tom@tomhv.uk>
-     * @since  2014-10-20
+     * @since  0.8.0
      *
      * @param  Organization $organization
      */
@@ -73,7 +73,7 @@ class User extends BaseUser
      * Get organizations
      *
      * @author Tom Haskins-Vaughan <tom@tomhv.uk>
-     * @since  2014-10-20
+     * @since  0.8.0
      *
      * @return ArrayCollection|Organization
      */
@@ -86,7 +86,7 @@ class User extends BaseUser
      * Create default Organization
      *
      * @author Tom Haskins-Vaughan <tom@tomhv.uk>
-     * @since  2014-10-20
+     * @since  0.8.0
      *
      * @ORM\PrePersist
      */
@@ -102,7 +102,7 @@ class User extends BaseUser
      * Get default Organization
      *
      * @author Tom Haskins-Vaughan <tom@tomhv.uk>
-     * @since  2014-10-23
+     * @since  0.8.0
      *
      * @return Organization
      */

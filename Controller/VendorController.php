@@ -21,7 +21,7 @@ use PengarWin\DoubleEntryBundle\Form\Type\VendorType;
  * VendorController
  *
  * @author Tom Haskins-Vaughan <tom@tomhv.uk>
- * @since  1.0.0
+ * @since  0.8.0
  */
 class VendorController extends Controller
 {
@@ -29,7 +29,7 @@ class VendorController extends Controller
      * index
      *
      * @author Tom Haskins-Vaughan <tom@tomhv.uk>
-     * @since  1.0.0
+     * @since  0.8.0
      *
      * @Template
      *
@@ -91,7 +91,7 @@ class VendorController extends Controller
      * new
      *
      * @author Tom Haskins-Vaughan <tom@tomhv.uk>
-     * @since  1.0.0
+     * @since  0.8.0
      *
      * @Template
      *
@@ -135,7 +135,7 @@ class VendorController extends Controller
      * show
      *
      * @author Tom Haskins-Vaughan <tom@tomhv.uk>
-     * @since  1.0.0
+     * @since  0.8.0
      *
      * @Template
      *
@@ -164,7 +164,7 @@ class VendorController extends Controller
      * edit
      *
      * @author Tom Haskins-Vaughan <tom@tomhv.uk>
-     * @since  1.0.0
+     * @since  0.8.0
      *
      * @Template
      *

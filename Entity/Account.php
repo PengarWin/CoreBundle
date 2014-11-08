@@ -18,7 +18,7 @@ use PengarWin\DoubleEntryBundle\Model\AccountInterface;
  * Account
  *
  * @author Tom Haskins-Vaughan <tom@tomhv.uk>
- * @since  2014-10-08
+ * @since  0.8.0
  *
  * @ORM\Entity
  * @ORM\Table(name="pengarwin_account")

@@ -24,7 +24,7 @@ use PengarWin\DoubleEntryBundle\Form\Type\SimpleJournalType;
  * AccountController
  *
  * @author Tom Haskins-Vaughan <tom@tomhv.uk>
- * @since  2014-10-09
+ * @since  0.8.0
  */
 class AccountController extends Controller
 {
@@ -32,7 +32,7 @@ class AccountController extends Controller
      * index
      *
      * @author Tom Haskins-Vaughan <tom@tomhv.uk>
-     * @since  2014-10-09
+     * @since  0.8.0
      *
      * @Template
      *
@@ -105,7 +105,7 @@ class AccountController extends Controller
      * show
      *
      * @author Tom Haskins-Vaughan <tom@tomhv.uk>
-     * @since  2014-10-11
+     * @since  0.8.0
      *
      * @Template
      * @ParamConverter("account", class="PengarWin\CoreBundle\Entity\Account")

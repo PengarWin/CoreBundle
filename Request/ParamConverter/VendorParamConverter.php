@@ -13,7 +13,7 @@ use PengarWin\DoubleEntryBundle\Model\OrganizationHandlerInterface;
  * VendorParamConverter
  *
  * @author Tom Haskins-Vaughan <tom@tomhv.uk>
- * @since  1.0.0
+ * @since  0.8.0
  */
 class VendorParamConverter implements ParamConverterInterface
 {
@@ -31,7 +31,7 @@ class VendorParamConverter implements ParamConverterInterface
      * Constructor
      *
      * @author Tom Haskins-Vaughan <tom@tomhv.uk>
-     * @since  1.0.0
+     * @since  0.8.0
      *
      * @param  EntityManager                $em
      * @param  OrganizationHandlerInterface $organizationHandler
@@ -51,7 +51,7 @@ class VendorParamConverter implements ParamConverterInterface
      * Stores the object in the request
      *
      * @author Tom Haskins-Vaughan <tom@tomhv.uk>
-     * @since  1.0.0
+     * @since  0.8.0
      *
      * @param Request        $request       The request
      * @param ParamConverter $configuration Contains the name, class and options of the object
@@ -83,7 +83,7 @@ class VendorParamConverter implements ParamConverterInterface
      * Checks if the object is supported.
      *
      * @author Tom Haskins-Vaughan <tom@tomhv.uk>
-     * @since  1.0.0
+     * @since  0.8.0
      *
      * @param  ParamConverter $configuration Should be an instance of ParamConverter
      *

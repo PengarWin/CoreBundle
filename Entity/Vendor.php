@@ -17,7 +17,7 @@ use PengarWin\DoubleEntryBundle\Model\VendorInterface;
  * Vendor
  *
  * @author Tom Haskins-Vaughan <tom@tomhv.uk>
- * @since  2014-10-13
+ * @since  0.8.0
  *
  * @ORM\Entity
  * @ORM\Table(name="pengarwin_vendor")

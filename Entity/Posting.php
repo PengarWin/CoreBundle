@@ -17,7 +17,7 @@ use PengarWin\DoubleEntryBundle\Model\PostingInterface;
  * Posting
  *
  * @author Tom Haskins-Vaughan <tom@tomhv.uk>
- * @since  2014-10-11
+ * @since  0.8.0
  *
  * @ORM\Entity
  * @ORM\Table(name="pengarwin_posting")

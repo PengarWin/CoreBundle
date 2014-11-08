@@ -22,7 +22,7 @@ use PengarWin\DoubleEntryBundle\Model\Organization as BaseOrganization;
  * Represents a group of users who share access to a set of accounts
  *
  * @author Tom Haskins-Vaughan <tom@tomhv.uk>
- * @since  2014-10-20
+ * @since  0.8.0
  *
  * @ORM\Entity
  * @ORM\Table(name="pengarwin_organization")
