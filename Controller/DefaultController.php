@@ -1,21 +1,21 @@
 <?php
 
 /*
- * This file is part of the PengarWin package.
+ * This file is part of the Phospr package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace PengarWin\CoreBundle\Controller;
+namespace Phospr\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use PengarWin\CoreBundle\Entity\Account;
-use PengarWin\CoreBundle\Entity\Journal;
-use PengarWin\CoreBundle\Entity\Posting;
+use Phospr\CoreBundle\Entity\Account;
+use Phospr\CoreBundle\Entity\Journal;
+use Phospr\CoreBundle\Entity\Posting;
 
 /**
  * DefaultController
@@ -41,7 +41,7 @@ class DefaultController extends Controller
             ->addItem('Home', $this->get('router')->generate('_homepage'))
         ;
 
-        $chart = $this->get('pengarwin.account_handler')
+        $chart = $this->get('phospr.account_handler')
             ->getChartOfAccounts()
         ;
 

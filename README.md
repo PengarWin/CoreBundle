@@ -1,4 +1,4 @@
-PengarWinBundle
+PhosprBundle
 ===============
 
-PengarWin Symfony2 Bundle
+Phospr Symfony2 Bundle

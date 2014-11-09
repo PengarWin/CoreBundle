@@ -1,21 +1,21 @@
 <?php
 
 /*
- * This file is part of the PengarWin package.
+ * This file is part of the Phospr package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace PengarWin\CoreBundle\Controller;
+namespace Phospr\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use PengarWin\CoreBundle\Entity\Journal;
-use PengarWin\DoubleEntryBundle\Form\Type\JournalType;
-use PengarWin\DoubleEntryBundle\Exception\JournalImbalanceException;
+use Phospr\CoreBundle\Entity\Journal;
+use Phospr\DoubleEntryBundle\Form\Type\JournalType;
+use Phospr\DoubleEntryBundle\Exception\JournalImbalanceException;
 
 /**
  * JournalController
@@ -32,7 +32,7 @@ class JournalController extends Controller
      * @since  0.8.0
      *
      * @Template
-     * @ParamConverter("journal", class="\PengarWin\CoreBundle\Entity\Journal")
+     * @ParamConverter("journal", class="\Phospr\CoreBundle\Entity\Journal")
      *
      * @param  Request $request
      * @param  Journal $journal
@@ -42,7 +42,7 @@ class JournalController extends Controller
         $em = $this->get('doctrine')->getManager();
 
         $account = $em
-            ->getRepository('PengarWinCoreBundle:Account')
+            ->getRepository('PhosprCoreBundle:Account')
             ->findOneBy(array('path' => $request->get('path')))
         ;
 
@@ -52,7 +52,7 @@ class JournalController extends Controller
         $em->flush();
 
         return $this->redirect($this->generateUrl(
-            'pengarwin_account_show', array('path' => $account->getPath())
+            'phospr_account_show', array('path' => $account->getPath())
         ));
     }
 
@@ -63,7 +63,7 @@ class JournalController extends Controller
      * @since  0.8.0
      *
      * @Template
-     * @ParamConverter("journal", class="\PengarWin\CoreBundle\Entity\Journal")
+     * @ParamConverter("journal", class="\Phospr\CoreBundle\Entity\Journal")
      *
      * @param  Request $request
      * @param  Journal $journal
@@ -80,7 +80,7 @@ class JournalController extends Controller
                 $em->flush();
 
                 return $this->redirect($this->generateUrl(
-                    'pengarwin_account_show', array(
+                    'phospr_account_show', array(
                         'path' => $journal
                             ->getPostings()
                             ->first()

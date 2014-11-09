@@ -1,6 +1,6 @@
 <?php
 
-namespace PengarWin\CoreBundle\Entity;
+namespace Phospr\CoreBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks()
- * @ORM\Table(name="pengarwin_user")
+ * @ORM\Table(name="phospr_user")
  */
 class User extends BaseUser
 {
@@ -22,7 +22,7 @@ class User extends BaseUser
 
     /**
      * @ORM\ManyToMany(targetEntity="Organization", inversedBy="users", cascade={"persist"})
-     * @ORM\JoinTable(name="pengarwin_user_organization_ref")
+     * @ORM\JoinTable(name="phospr_user_organization_ref")
      */
     protected $organizations;
 

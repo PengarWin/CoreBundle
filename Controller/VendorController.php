@@ -1,21 +1,21 @@
 <?php
 
 /*
- * This file is part of the PengarWin package.
+ * This file is part of the Phospr package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace PengarWin\CoreBundle\Controller;
+namespace Phospr\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use PengarWin\CoreBundle\Entity\Vendor;
-use PengarWin\DoubleEntryBundle\Form\Type\VendorType;
+use Phospr\CoreBundle\Entity\Vendor;
+use Phospr\DoubleEntryBundle\Form\Type\VendorType;
 
 /**
  * VendorController
@@ -39,10 +39,10 @@ class VendorController extends Controller
     {
         $this->get('white_october_breadcrumbs')
             ->addItem('Home', $this->get('router')->generate('_homepage'))
-            ->addItem('Vendors', $this->get('router')->generate('pengarwin_vendor'))
+            ->addItem('Vendors', $this->get('router')->generate('phospr_vendor'))
         ;
 
-        $organization = $this->get('pengarwin.organization_handler')
+        $organization = $this->get('phospr.organization_handler')
             ->getOrganization()
         ;
 
@@ -51,7 +51,7 @@ class VendorController extends Controller
 
         $form = $this->createForm(new VendorType(), $vendor, array(
             'label' => 'Create',
-            'action' => $this->generateUrl('pengarwin_vendor_new'),
+            'action' => $this->generateUrl('phospr_vendor_new'),
         ));
 
         $vendors = $organization->getVendors();
@@ -101,13 +101,13 @@ class VendorController extends Controller
     {
         $this->get('white_october_breadcrumbs')
             ->addItem('Home', $this->get('router')->generate('_homepage'))
-            ->addItem('Vendors', $this->get('router')->generate('pengarwin_vendor'))
-            ->addItem('New', $this->get('router')->generate('pengarwin_vendor_new'))
+            ->addItem('Vendors', $this->get('router')->generate('phospr_vendor'))
+            ->addItem('New', $this->get('router')->generate('phospr_vendor_new'))
         ;
 
         $vendor = new Vendor();
         $vendor->setOrganization(
-            $this->get('pengarwin.organization_handler')->getOrganization()
+            $this->get('phospr.organization_handler')->getOrganization()
         );
 
         $form = $this->createForm(new VendorType(), $vendor, array(
@@ -122,7 +122,7 @@ class VendorController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl(
-                'pengarwin_vendor_show', array(
+                'phospr_vendor_show', array(
                     'slug' => $vendor->getSlug(),
                 )
             ));
@@ -139,7 +139,7 @@ class VendorController extends Controller
      *
      * @Template
      *
-     * @ParamConverter("vendor", class="PengarWin\CoreBundle\Entity\Vendor")
+     * @ParamConverter("vendor", class="Phospr\CoreBundle\Entity\Vendor")
      *
      * @param  Request $request
      * @param  Vendor  $vendor
@@ -148,10 +148,10 @@ class VendorController extends Controller
     {
         $this->get('white_october_breadcrumbs')
             ->addItem('Home', $this->get('router')->generate('_homepage'))
-            ->addItem('Vendors', $this->get('router')->generate('pengarwin_vendor'))
+            ->addItem('Vendors', $this->get('router')->generate('phospr_vendor'))
             ->addItem(
                 $vendor->getName(),
-                $this->get('router')->generate('pengarwin_vendor_show', array(
+                $this->get('router')->generate('phospr_vendor_show', array(
                     'slug' => $vendor->getSlug(),
                 ))
             )
@@ -168,7 +168,7 @@ class VendorController extends Controller
      *
      * @Template
      *
-     * @ParamConverter("vendor", class="PengarWin\CoreBundle\Entity\Vendor")
+     * @ParamConverter("vendor", class="Phospr\CoreBundle\Entity\Vendor")
      *
      * @param  Request $request
      * @param  Vendor  $vendor
@@ -177,16 +177,16 @@ class VendorController extends Controller
     {
         $this->get('white_october_breadcrumbs')
             ->addItem('Home', $this->get('router')->generate('_homepage'))
-            ->addItem('Vendors', $this->get('router')->generate('pengarwin_vendor'))
+            ->addItem('Vendors', $this->get('router')->generate('phospr_vendor'))
             ->addItem(
                 $vendor->getName(),
-                $this->get('router')->generate('pengarwin_vendor_show', array(
+                $this->get('router')->generate('phospr_vendor_show', array(
                     'slug' => $vendor->getSlug(),
                 ))
             )
             ->addItem(
                 'Edit',
-                $this->get('router')->generate('pengarwin_vendor_edit', array(
+                $this->get('router')->generate('phospr_vendor_edit', array(
                     'slug' => $vendor->getSlug(),
                 ))
             )
@@ -201,7 +201,7 @@ class VendorController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl(
-                'pengarwin_vendor_show', array(
+                'phospr_vendor_show', array(
                     'slug' => $vendor->getSlug(),
                 )
             ));

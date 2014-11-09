@@ -8,7 +8,7 @@
             <h3>Child Accounts</h3>
             <ul>
                 {% for child in account.children %}
-                    <li><a href="{{ path('pengarwin_account_show', { 'path': child.path }) }}">{{ child.name }}</a></li>
+                    <li><a href="{{ path('phospr_account_show', { 'path': child.path }) }}">{{ child.name }}</a></li>
                 {% endfor %}
             </ul>
         </div><!-- .section -->
@@ -34,8 +34,8 @@
                     <tr>
                         <td>{{ posting.journal.date|date('d M Y') }}</td>
                         <td>{{ posting.journal.chequeNumber }}</td>
-                        <td><a href="{{ path('pengarwin_vendor_show', { 'slug': posting.journal.vendor.slug}) }}">{{ posting.journal.vendor }}</a></td>
-                        <td><a href="{{ path('pengarwin_account_show', { 'path': posting.offsetPosting.account.path }) }}">{{ posting.offsetPosting.account.segmentation }}</a></td>
+                        <td><a href="{{ path('phospr_vendor_show', { 'slug': posting.journal.vendor.slug}) }}">{{ posting.journal.vendor }}</a></td>
+                        <td><a href="{{ path('phospr_account_show', { 'path': posting.offsetPosting.account.path }) }}">{{ posting.offsetPosting.account.segmentation }}</a></td>
                         <td>{{ posting.journal.description }}</td>
                         <td class="money">{{ posting.creditAmount ? posting.creditAmount|number_format(2) : '' }}</td>
                         <td class="money">{{ posting.debitAmount ? posting.debitAmount|number_format(2) : '' }}</td>
@@ -46,13 +46,13 @@
                     <tr>
                         <td>{{ posting.journal.date|date('d M Y') }}</td>
                         <td>{{ posting.journal.chequeNumber }}</td>
-                        <td><a href="{{ path('pengarwin_vendor_show', { 'slug': posting.journal.vendor.slug}) }}">{{ posting.journal.vendor }}</a></td>
-                        <td><a href="{{ path('pengarwin_account_show', { 'path': posting.offsetPosting.account.path }) }}">{{ posting.offsetPosting.account.segmentation }}</a></td>
+                        <td><a href="{{ path('phospr_vendor_show', { 'slug': posting.journal.vendor.slug}) }}">{{ posting.journal.vendor }}</a></td>
+                        <td><a href="{{ path('phospr_account_show', { 'path': posting.offsetPosting.account.path }) }}">{{ posting.offsetPosting.account.segmentation }}</a></td>
                         <td>{{ posting.journal.description }}</td>
                         <td class="money">{{ posting.creditAmount ? posting.creditAmount|number_format(2) : '' }}</td>
                         <td class="money">{{ posting.debitAmount ? posting.debitAmount|number_format(2) : '' }}</td>
                         <td class="money">{{ posting.calculatedBalance|number_format(2) }}</td>
-                        <td><a href="{{ path('pengarwin_journal_edit', { 'id': posting.journal.id }) }}">Edit</a></td>
+                        <td><a href="{{ path('phospr_journal_edit', { 'id': posting.journal.id }) }}">Edit</a></td>
                     </tr>
                 {% endfor %}
                 {{ form_start(form) }}

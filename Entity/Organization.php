@@ -1,20 +1,20 @@
 <?php
 
 /*
- * This file is part of the PengarWin package.
+ * This file is part of the Phospr package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace PengarWin\CoreBundle\Entity;
+namespace Phospr\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\Criteria;
-use PengarWin\DoubleEntryBundle\Model\OrganizationInterface;
-use PengarWin\DoubleEntryBundle\Model\Organization as BaseOrganization;
+use Phospr\DoubleEntryBundle\Model\OrganizationInterface;
+use Phospr\DoubleEntryBundle\Model\Organization as BaseOrganization;
 
 /**
  * Organization
@@ -25,7 +25,7 @@ use PengarWin\DoubleEntryBundle\Model\Organization as BaseOrganization;
  * @since  0.8.0
  *
  * @ORM\Entity
- * @ORM\Table(name="pengarwin_organization")
+ * @ORM\Table(name="phospr_organization")
  */
 class Organization extends BaseOrganization implements OrganizationInterface
 {

@@ -1,24 +1,24 @@
 <?php
 
 /*
- * This file is part of the PengarWin package.
+ * This file is part of the Phospr package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace PengarWin\CoreBundle\Controller;
+namespace Phospr\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use PengarWin\CoreBundle\Entity\Account;
-use PengarWin\CoreBundle\Entity\Journal;
-use PengarWin\CoreBundle\Entity\Posting;
-use PengarWin\CoreBundle\Entity\Vendor;
-use PengarWin\DoubleEntryBundle\Form\Type\SimpleJournalType;
+use Phospr\CoreBundle\Entity\Account;
+use Phospr\CoreBundle\Entity\Journal;
+use Phospr\CoreBundle\Entity\Posting;
+use Phospr\CoreBundle\Entity\Vendor;
+use Phospr\DoubleEntryBundle\Form\Type\SimpleJournalType;
 
 /**
  * AccountController
@@ -42,7 +42,7 @@ class AccountController extends Controller
     {
         $this->get('white_october_breadcrumbs')
             ->addItem('Home', $this->get('router')->generate('_homepage'))
-            ->addItem('Accounts', $this->get('router')->generate('pengarwin_account'))
+            ->addItem('Accounts', $this->get('router')->generate('phospr_account'))
         ;
 
         $em = $this->get('doctrine')->getManager();
@@ -60,7 +60,7 @@ class AccountController extends Controller
             $em->persist($form->getData());
             $em->flush();
 
-            return $this->redirect($this->generateUrl('pengarwin_account'));
+            return $this->redirect($this->generateUrl('phospr_account'));
         }
 
 
@@ -68,12 +68,12 @@ class AccountController extends Controller
         $criteria
             ->where($criteria->expr()->eq(
                 'organization',
-                $this->get('pengarwin.organization_handler')->getOrganization()
+                $this->get('phospr.organization_handler')->getOrganization()
             ))
             ->andWhere($criteria->expr()->gt('lvl', 0))
         ;
 
-        $accounts = $em->getRepository('PengarWinCoreBundle:Account')
+        $accounts = $em->getRepository('PhosprCoreBundle:Account')
             ->matching($criteria)
         ;
 
@@ -108,7 +108,7 @@ class AccountController extends Controller
      * @since  0.8.0
      *
      * @Template
-     * @ParamConverter("account", class="PengarWin\CoreBundle\Entity\Account")
+     * @ParamConverter("account", class="Phospr\CoreBundle\Entity\Account")
      *
      * @param  Request $request
      */
@@ -119,11 +119,11 @@ class AccountController extends Controller
                 $this->get('router')->generate('_homepage')
             )
             ->addItem('Accounts',
-                $this->get('router')->generate('pengarwin_account')
+                $this->get('router')->generate('phospr_account')
             )
         ;
 
-        $treePath = $this->get('pengarwin.account_handler')
+        $treePath = $this->get('phospr.account_handler')
             ->getTreePath($account)
         ;
 
@@ -131,7 +131,7 @@ class AccountController extends Controller
             if ($node->getLvl()) {
                 $this->get('white_october_breadcrumbs')
                     ->addItem($node->getName(),
-                        $this->get('router')->generate('pengarwin_account_show', array(
+                        $this->get('router')->generate('phospr_account_show', array(
                             'path' => $node->getPath()
                     )))
                 ;
@@ -146,7 +146,7 @@ class AccountController extends Controller
             $posting->setCalculatedBalance($calculatedBalance);
         }
 
-        $journal = $this->get('pengarwin.journal_handler')->createJournal();
+        $journal = $this->get('phospr.journal_handler')->createJournal();
 
         $form = $this->createForm(new SimpleJournalType(), $journal);
         $form->handleRequest($request);
@@ -167,7 +167,7 @@ class AccountController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl(
-                'pengarwin_account_show', array('path' => $account->getPath())
+                'phospr_account_show', array('path' => $account->getPath())
             ));
         }
 

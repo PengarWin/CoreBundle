@@ -1,13 +1,13 @@
 <?php
 
-namespace PengarWin\CoreBundle\Request\ParamConverter;
+namespace Phospr\CoreBundle\Request\ParamConverter;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Doctrine\ORM\EntityManager;
-use PengarWin\DoubleEntryBundle\Model\OrganizationHandlerInterface;
+use Phospr\DoubleEntryBundle\Model\OrganizationHandlerInterface;
 
 /**
  * VendorParamConverter
@@ -60,7 +60,7 @@ class VendorParamConverter implements ParamConverterInterface
      */
     public function apply(Request $request, ParamConverter $configuration)
     {
-        $vendor = $this->em->getRepository('PengarWinCoreBundle:Vendor')
+        $vendor = $this->em->getRepository('PhosprCoreBundle:Vendor')
             ->findOneBy(array(
                 'slug' => $request->attributes->get('slug'),
                 'organization' => $this->organizationHandler->getOrganization(),
@@ -91,6 +91,6 @@ class VendorParamConverter implements ParamConverterInterface
      */
     public function supports(ParamConverter $configuration)
     {
-        return 'PengarWin\CoreBundle\Entity\Vendor' === $configuration->getClass();
+        return 'Phospr\CoreBundle\Entity\Vendor' === $configuration->getClass();
     }
 }

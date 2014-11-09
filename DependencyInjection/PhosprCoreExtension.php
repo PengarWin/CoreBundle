@@ -1,13 +1,13 @@
 <?php
 
 /*
- * This file is part of the PengarWin DoubleEntryBundle package.
+ * This file is part of the Phospr DoubleEntryBundle package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace PengarWin\CoreBundle\DependencyInjection;
+namespace Phospr\CoreBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class PengarWinCoreExtension extends Extension
+class PhosprCoreExtension extends Extension
 {
     /**
      * {@inheritDoc}

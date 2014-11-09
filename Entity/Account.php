@@ -1,18 +1,18 @@
 <?php
 
 /*
- * This file is part of the PengarWin package.
+ * This file is part of the Phospr package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace PengarWin\CoreBundle\Entity;
+namespace Phospr\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use PengarWin\DoubleEntryBundle\Model\Account as BaseAccount;
-use PengarWin\DoubleEntryBundle\Model\AccountInterface;
+use Phospr\DoubleEntryBundle\Model\Account as BaseAccount;
+use Phospr\DoubleEntryBundle\Model\AccountInterface;
 
 /**
  * Account
@@ -21,7 +21,7 @@ use PengarWin\DoubleEntryBundle\Model\AccountInterface;
  * @since  0.8.0
  *
  * @ORM\Entity
- * @ORM\Table(name="pengarwin_account")
+ * @ORM\Table(name="phospr_account")
  * @ORM\HasLifecycleCallbacks()
  * @Gedmo\Tree(type="nested")
  * @ORM\Entity(repositoryClass="Gedmo\Tree\Entity\Repository\NestedTreeRepository")

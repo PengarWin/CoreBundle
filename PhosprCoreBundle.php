@@ -1,16 +1,16 @@
 <?php
 
 /*
- * This file is part of the PengarWin package.
+ * This file is part of the Phospr package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace PengarWin\CoreBundle;
+namespace Phospr\CoreBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class PengarWinCoreBundle extends Bundle
+class PhosprCoreBundle extends Bundle
 {
 }

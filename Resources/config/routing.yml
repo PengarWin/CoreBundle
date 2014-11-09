@@ -1,37 +1,37 @@
-pengarwin_vendor:
+phospr_vendor:
     path:      /vendor.{_format}
-    defaults:  { _controller: PengarWinCoreBundle:Vendor:index, _format: html}
+    defaults:  { _controller: PhosprCoreBundle:Vendor:index, _format: html}
     methods:   [GET,POST]
     requirements:
          _format: (html|json)
 
-pengarwin_vendor_new:
+phospr_vendor_new:
     path:      /vendor/new
-    defaults:  { _controller: PengarWinCoreBundle:Vendor:new }
+    defaults:  { _controller: PhosprCoreBundle:Vendor:new }
     methods:   [GET,POST]
 
-pengarwin_vendor_show:
+phospr_vendor_show:
     path:      /vendor/{slug}
-    defaults:  { _controller: PengarWinCoreBundle:Vendor:show }
+    defaults:  { _controller: PhosprCoreBundle:Vendor:show }
 
-pengarwin_vendor_edit:
+phospr_vendor_edit:
     path:      /vendor/{slug}/edit.{_format}
-    defaults:  { _controller: PengarWinCoreBundle:Vendor:edit, _format: html}
+    defaults:  { _controller: PhosprCoreBundle:Vendor:edit, _format: html}
     methods:   [GET,POST]
     requirements:
          _format: (html|json)
 
 
-pengarwin_journal_edit:
+phospr_journal_edit:
     path:      /journal/{id}/edit
-    defaults:  { _controller: PengarWinCoreBundle:Journal:edit }
+    defaults:  { _controller: PhosprCoreBundle:Journal:edit }
     methods:   [GET,POST]
     requirements:
         id: \d+
 
-pengarwin_journal_post:
+phospr_journal_post:
     path:      /accounts/{path}/post-journal/{id}
-    defaults:  { _controller: PengarWinCoreBundle:Journal:post }
+    defaults:  { _controller: PhosprCoreBundle:Journal:post }
     methods:   [POST]
     requirements:
         _method: POST
@@ -39,20 +39,20 @@ pengarwin_journal_post:
         journal_id: \d+
 
 
-pengarwin_account:
+phospr_account:
     path:      /accounts.{_format}
-    defaults:  { _controller: PengarWinCoreBundle:Account:index, _format: html }
+    defaults:  { _controller: PhosprCoreBundle:Account:index, _format: html }
     methods:   [GET,POST]
     requirements:
          _format: (html|json)
 
-pengarwin_account_show:
+phospr_account_show:
     path:      /accounts/{path}
-    defaults:  { _controller: PengarWinCoreBundle:Account:show }
+    defaults:  { _controller: PhosprCoreBundle:Account:show }
     requirements:
         path: .+
 
 
-pengarwin_homepage:
+phospr_homepage:
     path:      /
-    defaults:  { _controller: PengarWinCoreBundle:Default:index }
+    defaults:  { _controller: PhosprCoreBundle:Default:index }

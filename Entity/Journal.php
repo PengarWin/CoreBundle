@@ -1,17 +1,17 @@
 <?php
 
 /*
- * This file is part of the PengarWin package.
+ * This file is part of the Phospr package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace PengarWin\CoreBundle\Entity;
+namespace Phospr\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use PengarWin\DoubleEntryBundle\Model\Journal as BaseJournal;
-use PengarWin\DoubleEntryBundle\Model\JournalInterface;
+use Phospr\DoubleEntryBundle\Model\Journal as BaseJournal;
+use Phospr\DoubleEntryBundle\Model\JournalInterface;
 
 /**
  * Journal
@@ -20,7 +20,7 @@ use PengarWin\DoubleEntryBundle\Model\JournalInterface;
  * @since  0.8.0
  *
  * @ORM\Entity
- * @ORM\Table(name="pengarwin_journal")
+ * @ORM\Table(name="phospr_journal")
  */
 class Journal extends BaseJournal implements JournalInterface
 {

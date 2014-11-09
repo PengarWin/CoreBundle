@@ -1,17 +1,17 @@
 <?php
 
 /*
- * This file is part of the PengarWin package.
+ * This file is part of the Phospr package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace PengarWin\CoreBundle\Entity;
+namespace Phospr\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use PengarWin\DoubleEntryBundle\Model\Vendor as BaseVendor;
-use PengarWin\DoubleEntryBundle\Model\VendorInterface;
+use Phospr\DoubleEntryBundle\Model\Vendor as BaseVendor;
+use Phospr\DoubleEntryBundle\Model\VendorInterface;
 
 /**
  * Vendor
@@ -20,7 +20,7 @@ use PengarWin\DoubleEntryBundle\Model\VendorInterface;
  * @since  0.8.0
  *
  * @ORM\Entity
- * @ORM\Table(name="pengarwin_vendor")
+ * @ORM\Table(name="phospr_vendor")
  */
 class Vendor extends BaseVendor implements VendorInterface
 {

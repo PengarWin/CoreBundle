@@ -1,15 +1,15 @@
 parameters:
-    pengarwin.account_handler.class: PengarWin\DoubleEntryBundle\Model\AccountHandler
-    pengarwin.vendor_param_converter.class: PengarWin\CoreBundle\Request\ParamConverter\VendorParamConverter
+    phospr.account_handler.class: Phospr\DoubleEntryBundle\Model\AccountHandler
+    phospr.vendor_param_converter.class: Phospr\CoreBundle\Request\ParamConverter\VendorParamConverter
 
 services:
-    pengarwin.account_handler:
-        class:     %pengarwin.account_handler.class%
+    phospr.account_handler:
+        class:     %phospr.account_handler.class%
 
-    pengarwin.vendor_param_converter:
-        class:     %pengarwin.vendor_param_converter.class%
+    phospr.vendor_param_converter:
+        class:     %phospr.vendor_param_converter.class%
         arguments:
             - @doctrine.orm.entity_manager
-            - @pengarwin.organization_handler
+            - @phospr.organization_handler
         tags:
             - { name: request.param_converter, converter: vendor, priority: 10 }

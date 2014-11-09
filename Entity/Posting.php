@@ -1,17 +1,17 @@
 <?php
 
 /*
- * This file is part of the PengarWin package.
+ * This file is part of the Phospr package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace PengarWin\CoreBundle\Entity;
+namespace Phospr\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use PengarWin\DoubleEntryBundle\Model\Posting as BasePosting;
-use PengarWin\DoubleEntryBundle\Model\PostingInterface;
+use Phospr\DoubleEntryBundle\Model\Posting as BasePosting;
+use Phospr\DoubleEntryBundle\Model\PostingInterface;
 
 /**
  * Posting
@@ -20,7 +20,7 @@ use PengarWin\DoubleEntryBundle\Model\PostingInterface;
  * @since  0.8.0
  *
  * @ORM\Entity
- * @ORM\Table(name="pengarwin_posting")
+ * @ORM\Table(name="phospr_posting")
  * @ORM\HasLifecycleCallbacks()
  */
 class Posting extends BasePosting implements PostingInterface
