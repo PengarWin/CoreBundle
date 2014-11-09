@@ -1,3 +1,18 @@
+a
+{
+    text-decoration: none;
+}
+
+a:hover
+{
+    text-decoration: underline;
+}
+
+a:visited
+{
+    font-weight: normal;
+}
+
 body
 {
     font-family: arial, sans-serif;
@@ -42,7 +57,7 @@ h3
 
 .masthead .logo
 {
-    font-family: 'Norican', cursive;
+    font-family: 'Aladin', cursive;
 }
 
 #dynamicMasthead .logo

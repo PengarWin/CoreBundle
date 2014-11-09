@@ -1,22 +1,22 @@
 /*
- * http://www.colorcombos.com/color-scheme-6.html
+ * #FF3333 #999999 #669999 #003333
  */
 
 body
 {
-    background-color: #cccc99;
-    color: #333;
+    background-color: #999;
+    color: #003333;
 }
 
 h1, h2, h3, h4
 {
-    color: #990033;
+    color: #333;
 }
 
 .masthead
 {
-    background-color: #666633;
-    color: #cccc99
+    background-color: #003333;
+    color: #ff3333;
 }
 
 .masthead a
@@ -32,5 +32,10 @@ h1, h2, h3, h4
 #footer,
 .breadcrumbs.main.section a
 {
-    color: #666633;
+    color: #333;
+}
+
+a
+{
+    color: #669999;
 }
