@@ -10,7 +10,7 @@ body
 
 h1, h2, h3, h4
 {
-    color: #333;
+    color: #699;
 }
 
 .masthead
@@ -32,10 +32,27 @@ h1, h2, h3, h4
 #footer,
 .breadcrumbs.main.section a
 {
-    color: #333;
+    color: #444;
 }
 
 a
 {
-    color: #669999;
+    color: #f33;
+}
+
+input,
+button
+{
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 0.5em;
+}
+
+input[type="submit"],
+button
+{
+    background-color: #ff3333;
+    color: #fff;
+    border-color: #ff3333;
+    padding: 0.5em 1em;
 }

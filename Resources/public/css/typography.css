@@ -48,7 +48,8 @@ h3
     text-decoration: inherit;
 }
 
-.breadcrumbs.main.section > .inner > *
+.breadcrumbs.main.section > .inner > *,
+button
 {
     font-size: 0.9em;
     text-transform: uppercase;

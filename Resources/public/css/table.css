@@ -10,7 +10,11 @@ table td
     padding: 0.5em;
 }
 
+table tbody tr td
+{
+    border-top: 1px dotted #ddd;
+}
+
 table tbody tr:nth-of-type(odd)
 {
-    background-color: #eee;
 }
