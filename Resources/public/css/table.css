@@ -7,7 +7,19 @@ table th,
 table td
 {
     text-align: left;
-    padding: 0.5em;
+    padding:  1em 0.5em;
+}
+
+table th:first-of-type,
+table td:first-of-type
+{
+    padding-left: 0;
+}
+
+table th:last-of-type,
+table td:last-of-type
+{
+    padding-right: 0;
 }
 
 table tbody tr td
