@@ -13,9 +13,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Phospr\CoreBundle\Entity\Account;
-use Phospr\CoreBundle\Entity\Journal;
-use Phospr\CoreBundle\Entity\Posting;
 
 /**
  * DefaultController
@@ -44,6 +41,5 @@ class DefaultController extends Controller
         $chart = $this->get('phospr.account_handler')
             ->getChartOfAccounts()
         ;
-
     }
 }
