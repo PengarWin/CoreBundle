@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Phospr\DoubleEntryBundle\Form\Type\SimpleJournalType;
+use Phospr\CoreBundle\Entity\Account;
 
 /**
  * AccountController

@@ -32,7 +32,7 @@ class JournalController extends Controller
      * @since  0.8.0
      *
      * @Template
-     * @ParamConverter("journal", class="\Phospr\CoreBundle\Entity\Journal")
+     * @ParamConverter("journal", class="Phospr\CoreBundle\Entity\Journal")
      *
      * @param  Request $request
      * @param  Journal $journal
@@ -63,7 +63,7 @@ class JournalController extends Controller
      * @since  0.8.0
      *
      * @Template
-     * @ParamConverter("journal", class="\Phospr\CoreBundle\Entity\Journal")
+     * @ParamConverter("journal", class="Phospr\CoreBundle\Entity\Journal")
      *
      * @param  Request $request
      * @param  Journal $journal
