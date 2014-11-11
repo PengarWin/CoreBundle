@@ -16,7 +16,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Phospr\CoreBundle\Entity\Account;
 use Phospr\CoreBundle\Entity\Journal;
-use Phospr\CoreBundle\Entity\Posting;
 use Phospr\CoreBundle\Entity\Vendor;
 use Phospr\DoubleEntryBundle\Form\Type\SimpleJournalType;
 
@@ -157,8 +156,10 @@ class AccountController extends Controller
             $amount  = $form->getData()->getCreditAmount();
             $amount -= $form->getData()->getDebitAmount();
 
-            $form->getData()->addPosting(new Posting($account, $amount));
-            $form->getData()->addPosting(new Posting(
+            $ph = $this->get('phospr.posting_handler');
+
+            $form->getData()->addPosting($ph->createPosting($account, $amount));
+            $form->getData()->addPosting($ph->createPosting(
                 $form->getData()->getOffsetAccount(),
                 -1*$amount
             ));
