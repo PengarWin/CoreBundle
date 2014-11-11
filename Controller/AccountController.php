@@ -14,9 +14,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Phospr\CoreBundle\Entity\Account;
-use Phospr\CoreBundle\Entity\Journal;
-use Phospr\CoreBundle\Entity\Vendor;
 use Phospr\DoubleEntryBundle\Form\Type\SimpleJournalType;
 
 /**
@@ -45,9 +42,10 @@ class AccountController extends Controller
         ;
 
         $em = $this->get('doctrine')->getManager();
+        $ah = $this->get('phospr.account_handler');
 
-        $form = $this->createFormBuilder(new Account())
-            ->add('parent')
+        $form = $this->createFormBuilder($ah->createAccount())
+            ->add('parent', 'account_selector')
             ->add('name')
             ->add('save', 'submit', array('label' => 'Create Account'))
             ->getForm()
