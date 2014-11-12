@@ -64,8 +64,7 @@ class VendorController extends Controller
                   'label'                     => $vendor->getName(),
                   'value'                     => $vendor->getName(),
                   'defaultOffsetAccount'      => $vendor
-                      ->getDefaultOffsetAccount()
-                      ->getSegmentation(),
+                      ->getDefaultOffsetAccountSegmentation(),
                   'defaultJournalDescription' => $vendor
                       ->getDefaultJournalDescription(),
                   'defaultJournalCreditAmount' => $vendor
