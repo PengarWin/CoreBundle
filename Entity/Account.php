@@ -21,7 +21,16 @@ use Phospr\DoubleEntryBundle\Model\AccountInterface;
  * @since  0.8.0
  *
  * @ORM\Entity
- * @ORM\Table(name="phospr_account")
+ * @ORM\Table(name="phospr_account",uniqueConstraints={
+ *    @ORM\UniqueConstraint(
+ *        name="org_path_idx",
+ *        columns={"organization_id", "path"}
+ *    ),
+ *    @ORM\UniqueConstraint(
+ *        name="org_segmentation_idx",
+ *        columns={"organization_id", "segmentation"}
+ *    ),
+ * })
  * @ORM\HasLifecycleCallbacks()
  * @Gedmo\Tree(type="nested")
  * @ORM\Entity(repositoryClass="Gedmo\Tree\Entity\Repository\NestedTreeRepository")

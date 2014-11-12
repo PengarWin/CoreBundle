@@ -55,8 +55,15 @@ class AccountController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em->persist($form->getData());
-            $em->flush();
+            try {
+                $em->persist($form->getData());
+                $em->flush();
+            } catch (\Doctrine\DBAL\DBALException $e) {
+                exit(sprintf(
+                    'Account %s already exists',
+                    $form->getData()->getSegmentation()
+                ));
+            }
 
             return $this->redirect($this->generateUrl('phospr_account'));
         }
