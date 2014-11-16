@@ -12,6 +12,7 @@ namespace Phospr\CoreBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Doctrine\Common\Collections\Criteria;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Phospr\DoubleEntryBundle\Form\Type\SimpleJournalType;
@@ -69,13 +70,14 @@ class AccountController extends Controller
         }
 
 
-        $criteria = new \Doctrine\Common\Collections\Criteria();
+        $criteria = new Criteria();
         $criteria
             ->where($criteria->expr()->eq(
                 'organization',
                 $this->get('phospr.organization_handler')->getOrganization()
             ))
             ->andWhere($criteria->expr()->gt('lvl', 0))
+            ->orderBy(array('lft' => Criteria::ASC))
         ;
 
         $accounts = $em->getRepository('PhosprCoreBundle:Account')
