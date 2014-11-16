@@ -22,6 +22,13 @@ phospr_vendor_edit:
          _format: (html|json)
 
 
+phospr_journal_show:
+    path:      /journals/{id}.{_format}
+    defaults:  { _controller: PhosprCoreBundle:Journal:show, _format: html }
+    methods:   [GET]
+    requirements:
+        id: \d+
+
 phospr_journal_edit:
     path:      /journal/{id}/edit
     defaults:  { _controller: PhosprCoreBundle:Journal:edit }

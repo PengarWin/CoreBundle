@@ -47,7 +47,11 @@
                         <td>{{ posting.journal.date|date('d M Y') }}</td>
                         <td>{{ posting.journal.chequeNumber }}</td>
                         <td><a href="{{ path('phospr_vendor_show', { 'slug': posting.journal.vendor.slug}) }}">{{ posting.journal.vendor }}</a></td>
-                        <td><a href="{{ path('phospr_account_show', { 'path': posting.offsetPosting.account.path }) }}">{{ posting.offsetPosting.account.segmentation }}</a></td>
+                        {% if posting.journal.isSimpleJournal %}
+                            <td><a href="{{ path('phospr_account_show', { 'path': posting.offsetPosting.account.path }) }}">{{ posting.offsetPosting.account.segmentation }}</a></td>
+                        {% else %}
+                            <td><a href="{{ path('phospr_journal_show', { 'id': posting.journal.id }) }}">-- split --</a></td>
+                        {% endif %}
                         <td>{{ posting.journal.description }}</td>
                         <td class="money">{{ posting.creditAmount ? posting.creditAmount|number_format(2) : '' }}</td>
                         <td class="money">{{ posting.debitAmount ? posting.debitAmount|number_format(2) : '' }}</td>

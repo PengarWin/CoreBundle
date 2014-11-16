@@ -60,6 +60,25 @@ class JournalController extends Controller
      * edit
      *
      * @author Tom Haskins-Vaughan <tom@tomhv.uk>
+     * @since  0.10.0
+     *
+     * @Template
+     * @ParamConverter("journal", class="Phospr\CoreBundle\Entity\Journal")
+     *
+     * @param  Request $request
+     * @param  Journal $journal
+     */
+    public function showAction(Request $request, Journal $journal)
+    {
+        return array(
+            'journal' => $journal,
+        );
+    }
+
+    /**
+     * edit
+     *
+     * @author Tom Haskins-Vaughan <tom@tomhv.uk>
      * @since  0.8.0
      *
      * @Template
@@ -70,23 +89,28 @@ class JournalController extends Controller
      */
     public function editAction(Request $request, Journal $journal)
     {
+        // Let's add a blank posting
+        $journal->addPosting(
+            $this->get('phospr.posting_handler')->createPosting()
+        );
+
         $form = $this->createForm('journal', $journal);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             try {
+                foreach ($form->getData()->getPostings() as $posting) {
+                    if (!$posting->getAccount()) {
+                        $form->getData()->removePosting($posting);
+                    }
+                }
+
                 $em = $this->get('doctrine')->getManager();
                 $em->persist($form->getData());
                 $em->flush();
 
                 return $this->redirect($this->generateUrl(
-                    'phospr_account_show', array(
-                        'path' => $journal
-                            ->getPostings()
-                            ->first()
-                            ->getAccount()
-                            ->getPath(),
-                    )
+                    'phospr_journal_show', array('id' => $journal->getId())
                 ));
             } catch (JournalImbalanceException $e) {
                 exit($e->getMessage());
