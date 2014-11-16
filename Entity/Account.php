@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Phospr\DoubleEntryBundle\Model\Account as BaseAccount;
 use Phospr\DoubleEntryBundle\Model\AccountInterface;
+use JMS\Serializer\Annotation as JMSSerializer;
 
 /**
  * Account
@@ -34,6 +35,8 @@ use Phospr\DoubleEntryBundle\Model\AccountInterface;
  * @ORM\HasLifecycleCallbacks()
  * @Gedmo\Tree(type="nested")
  * @ORM\Entity(repositoryClass="Gedmo\Tree\Entity\Repository\NestedTreeRepository")
+ *
+ * @JMSSerializer\ExclusionPolicy("all")
  */
 class Account extends BaseAccount implements AccountInterface
 {

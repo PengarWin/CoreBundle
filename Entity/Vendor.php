@@ -12,12 +12,15 @@ namespace Phospr\CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Phospr\DoubleEntryBundle\Model\Vendor as BaseVendor;
 use Phospr\DoubleEntryBundle\Model\VendorInterface;
+use JMS\Serializer\Annotation as JMSSerializer;
 
 /**
  * Vendor
  *
  * @author Tom Haskins-Vaughan <tom@tomhv.uk>
  * @since  0.8.0
+ *
+ * @JMSSerializer\ExclusionPolicy("all")
  *
  * @ORM\Entity
  * @ORM\Table(name="phospr_vendor")
@@ -47,4 +50,12 @@ class Vendor extends BaseVendor implements VendorInterface
      * @ORM\JoinColumn(name="default_offset_account_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $defaultOffsetAccount;
+
+    /**
+     * @JMSSerializer\VirtualProperty
+     */
+    public function getLabel()
+    {
+        return $this->getName();
+    }
 }

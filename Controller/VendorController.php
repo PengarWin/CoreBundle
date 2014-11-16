@@ -16,6 +16,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Phospr\CoreBundle\Entity\Vendor;
 use Phospr\DoubleEntryBundle\Form\Type\VendorType;
+use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\FOSRestController;
 
 /**
  * VendorController
@@ -23,8 +25,24 @@ use Phospr\DoubleEntryBundle\Form\Type\VendorType;
  * @author Tom Haskins-Vaughan <tom@tomhv.uk>
  * @since  0.8.0
  */
-class VendorController extends Controller
+class VendorController extends FOSRestController
 {
+    /**
+     * all
+     *
+     * @author Tom Haskins-Vaughan <tom@tomhv.uk>
+     * @since  0.10.0
+     *
+     * @Rest\View()
+     */
+    public function allAction()
+    {
+        return $this->get('phospr.organization_handler')
+            ->getOrganization()
+            ->getVendors()
+        ;
+    }
+
     /**
      * index
      *
@@ -37,6 +55,7 @@ class VendorController extends Controller
      */
     public function indexAction(Request $request)
     {
+        exit('deprecated');
         $this->get('white_october_breadcrumbs')
             ->addItem('Home', $this->get('router')->generate('_homepage'))
             ->addItem('Vendors', $this->get('router')->generate('phospr_vendor'))

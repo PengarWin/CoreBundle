@@ -1,21 +1,26 @@
+acme_demo_user_all:
+    path:  /vendors.{_format}
+    defaults: { _controller: PhosprCoreBundle:Vendor:all, _format: html }
+    methods: [GET]
+
 phospr_vendor:
-    path:      /vendor.{_format}
+    path:      /vendors.{_format}
     defaults:  { _controller: PhosprCoreBundle:Vendor:index, _format: html}
     methods:   [GET,POST]
     requirements:
          _format: (html|json)
 
 phospr_vendor_new:
-    path:      /vendor/new
+    path:      /vendors/new
     defaults:  { _controller: PhosprCoreBundle:Vendor:new }
     methods:   [GET,POST]
 
 phospr_vendor_show:
-    path:      /vendor/{slug}
+    path:      /vendors/{slug}
     defaults:  { _controller: PhosprCoreBundle:Vendor:show }
 
 phospr_vendor_edit:
-    path:      /vendor/{slug}/edit.{_format}
+    path:      /vendors/{slug}/edit.{_format}
     defaults:  { _controller: PhosprCoreBundle:Vendor:edit, _format: html}
     methods:   [GET,POST]
     requirements:

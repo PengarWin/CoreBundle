@@ -4,7 +4,8 @@
         "php": ">=5.3.0",
         "phospr/double-entry-bundle": "~0.9",
         "whiteoctober/breadcrumbs-bundle": "dev-master",
-        "friendsofsymfony/user-bundle": "~2.0@dev"
+        "friendsofsymfony/user-bundle": "~2.0@dev",
+        "friendsofsymfony/rest-bundle":  "~1.4"
     },
     "autoload": {
         "psr-0": { "Phospr\\CoreBundle": "" }

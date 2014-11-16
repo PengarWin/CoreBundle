@@ -54,7 +54,7 @@
             <script>
                 $(function() {
                     $.ajax({
-                        url: "/vendor.json",
+                        url: "/vendors.json",
                         dataType: "json",
                         success: function(data) {
                             $(".vendor_selector").autocomplete({
@@ -64,19 +64,16 @@
                                 select: function(event, ui)
                                 {
                                     $("#simple_journal_description").val(
-                                        ui.item.defaultJournalDescription
+                                        ui.item.default_journal_description
                                     );
                                     $("#simple_journal_offsetAccount").val(
-                                        ui.item.defaultOffsetAccount
-                                    );
-                                    $("#simple_journal_description").val(
-                                        ui.item.defaultJournalDescription
+                                        ui.item.default_offset_account.segmentation
                                     );
                                     $("#simple_journal_creditAmount").val(
-                                        ui.item.defaultJournalCreditAmount
+                                        ui.item.default_journal_credit_amount
                                     );
                                     $("#simple_journal_debitAmount").val(
-                                        ui.item.defaultJournalDebitAmount
+                                        ui.item.default_journal_debit_amount
                                     );
                                 }
                             });
