@@ -3,7 +3,14 @@
 {% block content %}
     <h1>Welcome back, {{ app.user.username }}!</h1>
 
+    <h3>My Favourite Accounts</h3>
+    {% for account in favourite_accounts %}
+        <p><a href="{{ path('phospr_account_show', { 'path': account.path }) }}">{{ account.segmentation }}</a></p>
+    {% else %}
+        <p><em>You don't have any favourite accounts yet.</em></p>
+    {% endfor %}
 
+    <h3>Where now?</h3>
     {% if organization_handler.organization.chartOfAccounts %}
         <p><a href="{{ path('phospr_account') }}">Accounts</a></p>
     {% endif %}

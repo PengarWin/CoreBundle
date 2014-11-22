@@ -5,13 +5,14 @@ namespace Phospr\CoreBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Phospr\DoubleEntryBundle\Model\UserInterface;
 
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="phospr_user")
  */
-class User extends BaseUser
+class User extends BaseUser implements UserInterface
 {
     /**
      * @ORM\Id
@@ -25,6 +26,11 @@ class User extends BaseUser
      * @ORM\JoinTable(name="phospr_user_organization_ref")
      */
     protected $organizations;
+
+    /**
+     * @ORM\Column(type="array", name="my_favourite_account_ids")
+     */
+    protected $myFavouriteAccountIds = array(4, 16);
 
     /**
      * __construct()
@@ -109,5 +115,35 @@ class User extends BaseUser
     public function getDefaultOrganization()
     {
         return $this->getOrganizations()->first();
+    }
+
+    /**
+     * Set myFavouriteAccountIds
+     *
+     * @author Tom Haskins-Vaughan <tom@tomhv.uk>
+     * @since  0.10.0
+     *
+     * @param array $myFavouriteAccountIds
+     *
+     * @return User
+     */
+    public function setMyFavouriteAccountIds(array $myFavouriteAccountIds)
+    {
+        $this->myFavouriteAccountIds = $myFavouriteAccountIds;
+
+        return $this;
+    }
+
+    /**
+     * Get myFavouriteAccountIds
+     *
+     * @author Tom Haskins-Vaughan <tom@tomhv.uk>
+     * @since  0.10.0
+     *
+     * @return array
+     */
+    public function getMyFavouriteAccountIds()
+    {
+        return $this->myFavouriteAccountIds;
     }
 }

@@ -41,5 +41,14 @@ class DefaultController extends Controller
         $chart = $this->get('phospr.account_handler')
             ->getChartOfAccounts()
         ;
+
+        return array(
+            'favourite_accounts' => $this->get('phospr.account_handler')
+                ->getFavouriteAccountsForUser(
+                    $this->get('security.context')
+                        ->getToken()
+                        ->getUser()
+                )
+        );
     }
 }
