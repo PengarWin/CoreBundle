@@ -68,6 +68,7 @@ class Account extends BaseAccount implements AccountInterface
 
     /**
      * @ORM\OneToMany(targetEntity="Posting", mappedBy="account")
+     * @ORM\OrderBy({"date" = "ASC"})
      */
     protected $postings;
 }
